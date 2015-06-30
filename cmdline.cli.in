@@ -1,0 +1,177 @@
+##      @configure_input@
+##
+## Interface Description File for CLIG - command line interface generator
+## author: Harald Kirsch (kirschh@lionbioscience.com)
+## Adapted for autoproject by Jim Van Zandt <jrv@vanzandt.mv.com>
+
+## The Name specified is only used in/for the manual page
+Name sampsize
+
+## Usage specifies a one-liner which is printed as part of
+## usage-message. It is also used in the NAME-section of the manual
+## page as a short description.
+Usage {Computes sample size and power}
+
+## The Version specified is printed as part of the usage-message.
+## (The value comes from `configure.in', and is inserted by `configure')
+Version {@VERSION@}
+
+## Commandline specifies the name of a slot in the generated struct
+## which will be set to a newly allocated string holding the
+## concatenated command line. This is particularly useful for programs
+## which want to record their calling sequence somewhere, e.g. in a in
+## output file to document how it was generated.
+Commandline tool
+
+## These options were selected when autoproject was run.
+## More options can be added at any time (see clig(1) and examples below).
+
+Flag -h show_help {show usage information}
+Flag -v show_version {show program version}
+
+########################################################################
+## EXAMPLE OF FLAG OPTION
+
+## Flag options are rather trivial. They do not have any parameters.
+#Flag -v verbose {switch on verbose program operation}
+
+Flag -onesided onesided {one-sided test for comparisons}
+
+Flag -onesample onesample {one-sample test}
+
+Flag -matched matched {1:1 matched case-control study}
+
+Flag -cc correction {continuity correction}
+
+########################################################################
+## EXAMPLES OF STRING OPTIONS
+
+## String options can have one or more parameters. By default they
+## have exactly one parameter.
+#String -title title {title of x/y-plot}
+
+## To let them have exactly two parameters, use the following
+#String -xytitles xytitles {title of x- and y-axis} \
+#    {count = 2,2}
+
+## To impose no upper limit on the number of parameters, use oo,
+## i.e. double-`o'
+#String -plotnames plotnames {names of curves to plot} \
+#    {count = 1,oo}
+
+## An option you really need should be made mandatory. (I'm not sure
+## whether it can be called an `option' then?)
+#String -colors colors {colors to use in plots} \
+#    mandatory \
+#    {count = 1,5}
+
+## Non-mandatory options can have default values
+#String -bg background {background color} \
+#    {default = red}
+
+########################################################################
+## EXAMPLES OF FLOAT OPTIONS
+
+## The simplest Float-option has a default-count of 1, is not
+## mandatory, imposes no limit on the parameter and has no default
+#Float -o offset {offset to add to all curves to plot}
+
+## Float-option parameters can be forced to lie in a given range
+#Float -p p {probability}  {range = 0,1}
+    
+## `count', `mandatory' and `default' work as for String-options
+#Float -f f {frequencies} \
+#    {count = 2, 10} \
+#    {range = 0, 47.11 } \
+#    {default = 2 4 8 16.11}
+
+## special values for range-specs are -oo and oo denoting minus
+## infinity and infinity
+#Float -negscale negscale {negative scale value}     {range = -oo, 0.0}
+
+#Float -scale scale {scale value}     {range = 0.0, oo}
+
+
+Float -pop pop {target population size} \
+        {default = 0} \
+	{range = 0.0, oo}
+
+Float -e precision {precision of estimate (%) -- prevalence study option} \
+	{range = 0.0, 100} 
+
+Float -pr prevalence {prevalence (%) -- prevalence study option} \
+	{range = 0.0, 100} \
+	{default = 50}
+
+Float -level level {level of confidence interval (%)} \
+	{range = 50.0, 100} \
+	{default = 95}
+
+Float -alpha alpha {Risk alpha (%)} \
+        {range = 0.0, 100} \
+	{default = 5}
+
+Float -power power {Power of the test (%)} \
+	{range = 50.0, 100} \
+	{default = 90}
+
+Float -c ratio {number of controls per case, to be used with case control options} \
+        {range = 0, oo} {default = 1}
+
+Float -or odds_ratio {Odds Ratio -- case-control study option} \
+	{range = 0, oo}
+
+Float -exp exposed {Exposed controls (%) -- case-control study option} \
+	{range = 0.0, 100}
+
+Float -cp comp {#p1 (%) #p2 (%) -- two sample comparison of percentages} \
+        {count = 2,2} \
+	{range = 0, 100}
+
+Float -means means {#m1 #m2 #sd1 #sd2 -- two sample comparison of means} \
+        {count = 3,4}
+
+Float -rho rho {intraclass correlation coefficient -- cluster option} \
+	{range = 0.0, 1} \
+	{default = 0}
+
+Float -d delta {delta critical value -- equivalence} \
+        {range = 0.0, oo}
+
+########################################################################
+## EXAMPLES OF INT OPTIONS
+
+## Int-options work like Float options.
+#Int -a a {flog quarx flirim poli gam i nabgala} \
+#    mandatory
+#
+#Int -b b {ram dibum gabalabarum deri pum pam} \
+#    {count = 3,4} \
+#    {range = -10, 10} \
+#    {default = -1 0 1}
+
+Int -nob observed {minimum number of events observed in the sample} \
+        {range = 1, 10000}
+
+Int -bi binomial {#obs #succ (binomial events, #obs >= #succ)} \
+	{count = 2,2} \
+	{range = 0, oo} 
+
+Int -n sample {determine power from sample size} \
+	{range = 1, oo}
+
+Int -obsclus obsclus {number of observations per cluster} \
+	{range = 1, oo}
+
+Int -numclus numclus {minimum number of clusters} \
+	{range = 1, oo}
+
+########################################################################
+## EXAMPLES OF REST COMMAND
+
+## The Rest-command specifies what may be found on the command line
+## after all options have extracted their parameters. The Rest-command
+## has a default `count' of 1,oo, but here we set it to 1,10.
+#Rest infiles {list of input files} \
+#    {count = 1,10}
+

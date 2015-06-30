@@ -1,0 +1,14 @@
+Version 0.6.0. Sampsize computes sample size and power.  
+	
+	Sampsize computes sample size for prevalence surveys with finite
+	population correction, sample size to detect a minimum number of
+	events, sample size and power for one-sample and two-sample comparison
+	of percentages and means, corrections for cluster sampling designs, 
+	sample size and power for unmatched and 1:1 case-control studies, sample
+	size and power for non-inferiority trials. 
+	
+	This is a fast command line programme. Sampsize is written in C and 
+	depends only on libc. All computations are in double precision. 
+	A certification script is included. 
+	
+	Sampsize is released under the GNU General Public Licence.

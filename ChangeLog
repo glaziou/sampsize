@@ -1,0 +1,85 @@
+2003-11-09  Philippe Glaziou  <glaziou@pasteur-kh.org>
+	* sampsize 0.6.0: Continuity correction option for comparing
+	two percentages (sample size and power). Default is no correction.
+	Implemented sample size and power for non-inferiority (equivalence) 
+	tests of two percentages and two means.
+
+2003-06-05  Philippe Glaziou  <glaziou@pasteur-kh.org>
+	* sampsize 0.5.1: Minor bug fix release. Now compiles on Sparc-R220
+	Sun Solaris (8) and PPC-G4 Mac-OS X (10.2).  
+
+2003-06-05  Philippe Glaziou  <glaziou@pasteur-kh.org>
+	* sampsize 0.5.0: Added power and minimum detectable odds-ratio for 
+	unmatched case-control studies, sample size and power for 1:1 matched
+	case-control studies. Added sample size in comparative studies of
+	means and percentages, adjusted for cluster size and intraclass
+	correlation.
+	Corrected a bug in the self-test script chk.
+	Improved web-interface.
+	Added a postscript manual.
+	
+2003-05-30  Philippe Glaziou  <glaziou@pasteur-kh.org>
+	* sampsize 0.4.0: First beta release. The code of some previously slow
+	functions has been optimized.  A certification script is now used for
+	result validation and error checking of every new release. The results
+	of the certification log have been checked for accuracy either against
+	results obtained from manual computations, against statistical tables
+	from [Schlesselman JJ. Case-Control Studies. Oxford Univ. Press 1982],
+	or against results obtained from a commercial statistical software
+	compiled for the i386 architecture, under linux.  Internal
+	computations of sampsize are in double precision.  
+	Two files were added in a cgi-bin subdirectory, which can be used to
+	access sampsize from a cgi web-interface. 
+	
+2003-05-24  Philippe Glaziou  <glaziou@pasteur-kh.org>
+	* sampsize 0.3.1: Corrected a bug in one numerical function. The bug
+	resulted in sample sizes and power too conservative when entered means
+	were not integers. It did not affect other computations than sample
+	size and power determination for studies comparing means.
+	
+2003-05-24  Philippe Glaziou  <glaziou@pasteur-kh.org>
+	* sampsize 0.3.0: Added power determination. Most planned
+	features are now implemented, and no new feature will be 
+	added until the first beta release.
+	
+2003-05-24  Philippe Glaziou  <glaziou@pasteur-kh.org>
+	* sampsize 0.2.3: Added options for comparative studies of 
+	percentages and means.
+	
+2003-05-17  Philippe Glaziou  <glaziou@pasteur-kh.org>
+	* sampsize 0.2.2: Improved numerical library, cleaner output,
+	added Binomial Exact Confidence Intervals. 
+	
+2003-05-13  Philippe Glaziou  <glaziou@pasteur-kh.org>
+	* sampsize 0.2.1: Cleaned up code. Minor bug fixes, cleaner output.
+	
+2003-05-13  Philippe Glaziou  <glaziou@pasteur-kh.org>
+	* sampsize 0.2.0: Corrected display bug with very large sample sizes.
+	Added -level option, to compute any size give a CI% confidence
+	interval with any CI >= 50%. Separated the code file for numerical 
+	functions: the provided numfunc.c, numfunc.h are now required to 
+	compile. 
+	Added case control options.
+	
+2003-05-08  Philippe Glaziou  <glaziou@pasteur-kh.org>
+	* sampsize 0.1.5: Corrected bug where an sampsize entered
+	into an infinite loop if -nob non null and -pr null (a nonsense
+	combination of parameters). Added more documentation to the code. 
+
+2003-05-08  Philippe Glaziou  <glaziou@pasteur-kh.org>
+	* sampsize 0.1.4: added binomial method for small samples, 
+	exact method for prevalence equals zero.
+	* cmdline.c: added -nob option.
+
+2003-05-06  Philippe Glaziou  <glaziou@pasteur-kh.org>
+	* sampsize 0.1.3: corrected other bugs
+
+2003-05-02  Philippe Glaziou  <glaziou@pasteur-kh.org>
+	* sampsize 0.1.2: corrected bugs
+
+2003-05-02  Philippe Glaziou  <glaziou@pasteur-kh.org>
+	* sampsize 0.1.1: changed parsing of command line options
+
+2003-04-19  Philippe Glaziou  <glaziou@pasteur-kh.org>
+	* sampsize 0.1.0: initial version
+

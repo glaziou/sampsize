@@ -1,0 +1,229 @@
+#/bin/sh
+# certification script for sampsize
+# 
+echo ./sampsize -e 5
+./sampsize -e 5
+echo ./sampsize -e 5 -pr 10
+./sampsize -e 5 -pr 10
+echo ./sampsize -e 5 -pr 99
+./sampsize -e 5 -pr 99
+echo ./sampsize -e 0.01 -pr 0.01
+./sampsize -e 0.01 -pr 0.01
+echo ./sampsize -e 0.01 -pr 0.01 -level 99
+./sampsize -e 0.01 -pr 0.01 -level 99
+# 
+# testing -nob
+echo ./sampsize -nob 2 -pr 1
+./sampsize -nob 2 -pr 1
+echo ./sampsize -nob 20 -pr 0.01
+./sampsize -nob 20 -pr 0.01
+echo ./sampsize -nob 100 -pr 0.0001
+./sampsize -nob 100 -pr 0.0001
+echo ./sampsize -nob 100 -pr 0.0001 -level 99.999
+./sampsize -nob 100 -pr 0.0001 -level 99.999
+echo ./sampsize -nob 10000 -pr 1 -level 51
+./sampsize -nob 10000 -pr 1 -level 51
+echo ./sampsize -nob 10000 -pr 1 -level 99
+./sampsize -nob 10000 -pr 1 -level 99
+#
+# testing -bi
+echo ./sampsize -bi 100 0
+./sampsize -bi 100 0
+echo ./sampsize -bi 100000000 50000000
+./sampsize -bi 100000000 50000000
+echo ./sampsize -bi 100000000 50000000 -level 99.99
+./sampsize -bi 100000000 50000000 -level 99.99
+echo ./sampsize -bi 100000000 50000000 -level 55
+./sampsize -bi 100000000 50000000 -level 55
+echo ./sampsize -bi 12 4
+./sampsize -bi 12 4
+#
+# testing -cp
+echo ./sampsize -cp 1 99
+./sampsize -cp 1 99
+echo ./sampsize -cp 5 15 -onesided
+./sampsize -cp 5 15 -onesided
+echo ./sampsize -cp 0 30 -onesample 
+./sampsize -cp 0 30 -onesample 
+echo ./sampsize -cp 20 0 -onesided -onesample
+./sampsize -cp 20 0 -onesided -onesample
+echo ./sampsize -cp 34 35 -alpha 1
+./sampsize -cp 34 35 -alpha 1
+echo ./sampsize -cp 34 35 -alpha 1 -c 3
+./sampsize -cp 34 35 -alpha 1 -c 3
+echo ./sampsize -cp 34 35 -alpha 1 -c 1000001
+./sampsize -cp 34 35 -alpha 1 -c 1000001
+echo ./sampsize -cp 99 100 -alpha 0.5 -c 2.3 -onesided
+./sampsize -cp 99 100 -alpha 0.5 -c 2.3 -onesided
+echo ./sampsize -cp 34 35 -alpha 1 -cc
+./sampsize -cp 34 35 -alpha 1 -cc
+echo ./sampsize -cp 34 35 -alpha 1 -c 3 -cc
+./sampsize -cp 34 35 -alpha 1 -c 3 -cc
+echo ./sampsize -cp 34 35 -alpha 1 -c 1000001 -cc
+./sampsize -cp 34 35 -alpha 1 -c 1000001 -cc
+echo ./sampsize -cp 99 100 -alpha 0.5 -c 2.3 -onesided -cc
+./sampsize -cp 99 100 -alpha 0.5 -c 2.3 -onesided -cc
+#
+# testing -means
+echo ./sampsize -means 10 10 5 5
+./sampsize -means 10 10 5 5
+echo ./sampsize -means 10 11 5 4
+./sampsize -means 10 11 5 4
+echo ./sampsize -means 10 11 5 0 
+./sampsize -means 10 11 5 0 
+echo ./sampsize -means 10 11 5 0 -alpha 1
+./sampsize -means 10 11 5 0 -alpha 1
+echo ./sampsize -means 10 10 5 5 -cc
+./sampsize -means 10 10 5 5 -cc
+echo ./sampsize -means 10 11 5 4 -cc
+./sampsize -means 10 11 5 4 -cc 
+echo ./sampsize -means 10 11 5 0 -cc 
+./sampsize -means 10 11 5 0 -cc
+echo ./sampsize -means 10 11 5 0 -alpha 1 -cc
+./sampsize -means 10 11 5 0 -alpha 1 -cc
+echo ./sampsize -means 10 11 5 0 -alpha 3 -onesided
+./sampsize -means 10 11 5 0 -alpha 3 -onesided
+echo ./sampsize -means 10 13 5 0 -onesided
+./sampsize -means 10 13 5 0 -onesided
+echo ./sampsize -means 10 12 1.1 100
+./sampsize -means 10 12 1.1 100
+echo ./sampsize -means 10 14 5 -onesample
+./sampsize -means 10 14 5 -onesample
+echo ./sampsize -means 10 13 5 -onesample -onesided
+./sampsize -means 10 13 5 -onesample -onesided
+echo ./sampsize -means 10 12 5 -onesample -onesided -alpha 1
+./sampsize -means 10 12 5 -onesample -onesided -alpha 1
+echo ./sampsize -means 10 12 5 5 -power 99
+./sampsize -means 10 12 5 5 -power 99
+echo ./sampsize -means 10 11 5 4 -power 70
+./sampsize -means 10 11 5 4 -power 70
+echo ./sampsize -means 10 15 5 0 -power 99.9
+./sampsize -means 10 15 5 0 -power 99.9
+echo ./sampsize -means 10 14 5 0 -alpha 1 -power 78
+./sampsize -means 10 14 5 0 -alpha 1 -power 78
+echo ./sampsize -means 10 16 5 0 -alpha 3 -onesided -power 97 -c 0.01
+./sampsize -means 10 16 5 0 -alpha 3 -onesided -power 97 -c 0.01
+echo ./sampsize -means 10 11 5 0 -onesided -power 99.999
+./sampsize -means 10 11 5 0 -onesided -power 99.999
+echo ./sampsize -means 10 12 1.1 100 -power 92 -c 33
+./sampsize -means 10 12 1.1 100 -power 92 -c 33
+echo ./sampsize -means 10 14 5 -onesample -power 57 -c 10000
+./sampsize -means 10 14 5 -onesample -power 57 -c 10000
+echo ./sampsize -means 10 14 5 -onesample -onesided -power 99 
+./sampsize -means 10 14 5 -onesample -onesided -power 99 
+echo ./sampsize -means 10 10 5 -onesample -onesided -alpha 1 -power 99 
+./sampsize -means 10 10 5 -onesample -onesided -alpha 1 -power 99 
+#
+# testing -n with -cp
+echo ./sampsize -cp 1 99 -n 300
+./sampsize -cp 1 99 -n 300
+echo ./sampsize -cp 5 15 -onesided -n 20000 -c 3
+./sampsize -cp 5 15 -onesided -n 20000 -c 3
+echo ./sampsize -cp 0 30 -onesample -n 300 -c 2
+./sampsize -cp 0 30 -onesample -n 300 -c 2
+echo ./sampsize -cp 20 0 -onesided -onesample -n 20
+./sampsize -cp 20 0 -onesided -onesample -n 20
+echo ./sampsize -cp 34 35 -alpha 1 -n 1000
+./sampsize -cp 34 35 -alpha 1 -n 1000
+echo ./sampsize -cp 34 35 -alpha 1 -c 3 -n 49238
+./sampsize -cp 34 35 -alpha 1 -c 3 -n 49238
+echo ./sampsize -cp 99 100 -alpha 0.5 -c 2.3 -onesided -n 100
+./sampsize -cp 99 100 -alpha 0.5 -c 2.3 -onesided -n 100
+echo ./sampsize -cp 34 35 -alpha 1 -c 1000001 -n 23
+./sampsize -cp 34 35 -alpha 1 -c 1000001 -n 23
+#
+# testing -n with -means
+echo ./sampsize -means 10 10 5 5 -n 20
+./sampsize -means 10 10 5 5 -n 20
+echo ./sampsize -means 10 11 5 4 -n 10000000 -c 2.3
+./sampsize -means 10 11 5 4 -n 10000000 -c 2.3
+echo ./sampsize -means 10 11 5 0 -n 23 -c 3293873729
+./sampsize -means 10 11 5 0 -n 23 -c 3293873729
+echo ./sampsize -means 10 11 5 0 -alpha 1 -n 100
+./sampsize -means 10 11 5 0 -alpha 1 -n 100
+echo ./sampsize -means 10 11 5 0 -alpha 3 -onesided -n 100
+./sampsize -means 10 11 5 0 -alpha 3 -onesided -n 100
+echo ./sampsize -means 10 13 5 0 -onesided -n 25
+./sampsize -means 10 13 5 0 -onesided -n 25
+echo ./sampsize -means 10 12 1.1 100 -n 99
+./sampsize -means 10 12 1.1 100 -n 99
+echo ./sampsize -means 10 14 5 -onesample  -n 100
+./sampsize -means 10 14 5 -onesample  -n 100
+echo ./sampsize -means 10 13 5 -onesample -onesided -n 100
+./sampsize -means 10 13 5 -onesample -onesided -n 100
+echo ./sampsize -means 10 12 5 -onesample -onesided -alpha 1 -n 100
+./sampsize -means 10 12 5 -onesample -onesided -alpha 1 -n 100
+echo ./sampsize -means 10 12 5 5 -n 100
+./sampsize -means 10 12 5 5 -n 100
+echo ./sampsize -means 10 11 5 4 -n 100
+./sampsize -means 10 11 5 4 -n 100
+echo ./sampsize -means 10 15 5 0 -n 100
+./sampsize -means 10 15 5 0 -n 100
+echo ./sampsize -means 10 14 5 0 -alpha 1 -n 100
+./sampsize -means 10 14 5 0 -alpha 1 -n 100
+echo ./sampsize -means 10 16 5 0 -alpha 3 -onesided -c 0.01 -n 100
+./sampsize -means 10 16 5 0 -alpha 3 -onesided -c 0.01 -n 100
+echo ./sampsize -means 10 11 5 0 -onesided -n 100
+./sampsize -means 10 11 5 0 -onesided -n 100
+echo ./sampsize -means 10 12 1.1 100 -c 33 -n 100
+./sampsize -means 10 12 1.1 100 -c 33 -n 100
+echo ./sampsize -means 10 14 5 -onesample -c 10000 -n 100
+./sampsize -means 10 14 5 -onesample -c 10000 -n 100
+echo ./sampsize -means 10 14 5 -onesample -onesided -n 100
+./sampsize -means 10 14 5 -onesample -onesided -n 100
+echo ./sampsize -means 10 10 5 -onesample -onesided -alpha 1 -n 100
+./sampsize -means 10 10 5 -onesample -onesided -alpha 1 -n 100
+#
+# testing -exp
+echo ./sampsize -or 2 -exp 10
+./sampsize -or 2 -exp 10
+echo ./sampsize -or 0.2 -exp 3 -power 90 -alpha 5
+./sampsize -or 0.2 -exp 3 -power 90 -alpha 5
+echo ./sampsize -or 4 -exp 30 -c 2
+./sampsize -or 4 -exp 30 -c 2
+echo ./sampsize -or 4 -exp 30 -power 80
+./sampsize -or 4 -exp 30 -power 80
+echo ./sampsize -or 0.1 -exp 1 -alpha 1 -power 99
+./sampsize -or 0.1 -exp 1 -alpha 1 -power 99
+echo ./sampsize -or 1.1 -exp 5 -power 99 -alpha 1
+./sampsize -or 1.1 -exp 5 -power 99 -alpha 1
+echo ./sampsize -or 20 -exp 50
+./sampsize -or 20 -exp 50
+echo ./sampsize -or 1.5 -exp 35.29 -n 474 -c 0.538
+./sampsize -or 1.5 -exp 35.29 -n 474 -c 0.538
+echo ./sampsize -n 365 -exp 35 -onesided
+./sampsize -n 365 -exp 35 -onesided
+echo ./sampsize -n 200 -exp 25
+./sampsize -n 200 -exp 25
+echo ./sampsize -exp 30 -or 2 -matched
+./sampsize -exp 30 -or 2 -matched
+# 
+# testing cluster options
+echo ./sampsize -cp 20 21 -numclus 80 -rho 0.001
+./sampsize -cp 20 21 -numclus 80 -rho 0.001
+echo ./sampsize -cp 20 21 -numclus 9980 -rho 0.001
+./sampsize -cp 20 21 -numclus 9980 -rho 0.001
+echo ./sampsize -cp 20 21 -numclus 1000 -rho .9
+./sampsize -cp 20 21 -numclus 1000 -rho .9
+echo ./sampsize -means 1 2 3 4 -onesided
+./sampsize -means 1 2 3 4 -onesided
+echo ./sampsize -means 1 2 3 4 -onesided -obsclus 8 -rho 0.02
+./sampsize -means 1 2 3 4 -onesided -obsclus 8 -rho 0.02
+echo ./sampsize -means 1 2 3 -onesided -obsclus 8 -rho 0.02 -onesample
+./sampsize -means 1 2 3 -onesided -obsclus 8 -rho 0.02 -onesample
+echo ./sampsize -means 1 2 3 -onesided -obsclus 8 -rho 0.92 -onesample
+./sampsize -means 1 2 3 -onesided -obsclus 8 -rho 0.92 -onesample
+echo ./sampsize -cp 1 2 -n 2000 -obsclus 25 -rho .5
+./sampsize -cp 1 2 -n 2000 -obsclus 25 -rho .5
+#
+# testing equivalence
+echo ./sampsize -cp 20 20 -d 5
+./sampsize -cp 20 20 -d 5
+echo ./sampsize -cp 20 21 -d 5
+./sampsize -cp 20 21 -d 5
+echo ./sampsize -cp 0 1 -d 0.1
+./sampsize -cp 0 1 -d 0.1
+echo ./sampsize -means 12 12 5 5 -d 2
+./sampsize -means 12 12 5 5 -d 2
+echo ./sampsize -means 12 13 5 6 -d 2
+./sampsize -means 12 13 5 6 -d 2

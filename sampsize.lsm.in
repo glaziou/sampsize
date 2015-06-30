@@ -1,0 +1,21 @@
+Begin3
+Title:		sampsize
+Version:	@VERSION@
+Entered-date:	@ISODATE@
+Description:	Computes sample size with finite population correction
+		@configure_input@
+		Please edit sampsize.lsm.in to fix the Keywords and
+		Primary-site entries, add several more lines of
+		description here if appropriate, and to delete these
+		instructions.
+Keywords:	[substitute your keywords here]
+Author: 	glaziou@pasteur-kh.org (Philippe Glaziou)
+Maintained-by:	glaziou@pasteur-kh.org (Philippe Glaziou)
+Primary-site:	metlab.unc.edu pub/Linux/apps/some/directory
+		31k sampsize-@VERSION@.tar.gz
+		500  sampsize.lsm
+Alternate-site: 
+Original-site:  
+Platforms:      
+Copying-policy:	GNU copyleft
+End

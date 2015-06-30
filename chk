@@ -1,0 +1,17 @@
+#/bin/sh
+#
+# check script for sampsize
+# created 29/5/2003
+# Philippe Glaziou
+
+CHECK="./certify"
+MASTERLOG="certified.log"
+
+[ -x $CHECK ] || exit 0
+[ -r $MASTERLOG ] || exit 0
+
+$CHECK > cert
+[ -r "$MASTERLOG" ] && diff "$MASTERLOG" cert > cdiff && rm -f cert
+[ -s cdiff ] && cat cdiff && echo certification FAILED && rm -f cdiff && exit 1
+[ -s cdiff ] || echo certification OK
+rm -f cdiff

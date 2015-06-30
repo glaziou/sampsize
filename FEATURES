@@ -1,0 +1,26 @@
+Sampsize features:
+	* Command line interface
+
+Sampsize computes:
+	* Sample size for prevalence surveys
+	* Finite population correction
+	* Sample size to detect a minimum number of events
+	* Exact binomial confidence intervals
+	* Sample size for one-sample comparison of percentage to
+	  hypothesized value
+	* Sample size for two-sample comparison of percentages, with
+	  or without continuity correction
+	* Sample size for one-sample comparison of mean to hypothesized value 
+	* Sample size for two-sample comparison of means 
+	* Sample size in comparative studies of means and percentages,
+	  adjusted for cluster size and intraclass correlation
+	* Power of comparative studies of percentages (one and two-samples), 
+	  with or without continuity correction
+	* Power of comparative studies of means (one and two-samples)
+	* Sample size for unmatched case-control studies
+	* Power and minimum/maximum detectable odds-ratio (unmatched 
+          case-control studies)
+	* Sample size and power of 1:1 matched case-control studies
+	* Sample size of non-inferiority trials with comparison of means 
+	  and percentages
+

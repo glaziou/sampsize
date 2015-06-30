@@ -1,0 +1,682 @@
+README - sampsize
+
+  See INSTALL for installation instructions. 
+
+
+QUICK INSTALL:
+	./configure
+	make
+	make check	        ## see note¹ 
+	su
+	make install	        ## to install the executable with debug code
+	make install-strip	## to install the stripped executable
+
+  ¹note: optional programme checking for accuracy against results from a master
+  certification log created on 32-bit i386. The certification script will fail
+  on 62-bit processors, and should display minor differences in some results, 
+  but this is of no practical consequence.
+
+
+
+IMPORTANT NOTE:
+  This version of sampsize implements power and sample size for comparison of
+  percentages using formulae without continuity correction. Results will thus
+  slightly differ from previous versions of sampsize. The continuity correction
+  is still available with the additional option -cc.  That change is detailed
+  in the manpage and in the manual.
+
+
+
+USAGE -- Examples
+
+***** Prevalence surveys *****
+
+  *
+      To calculate the sample size given a 50% prevalence (default) and
+      infinite population size (also default), with 5% precision: the upper
+      boundary of the confidence interval will equal the observed prevalence
+      plus 5%, and the lower boundary will equal the observed prevalence minus
+      5%, i.e. [45% - 55%]:
+
+            cunegonde:~>sampsize -e 5
+
+      Assumptions:
+
+           Precision          = 5.00  %
+           Prevalence         = 50.00 %
+           Population size    = infinite
+
+              95% Confidence Interval specified limits [  45%   --   55% ]
+              (these limits equal prevalence plus or minus precision)
+
+      Estimated sample size:
+                            n =      385
+
+              95% Binomial Exact Confidence Interval with n =      385
+              and n * prevalence =    193 observed events:
+              [45.0212%   -- 55.2365% ]
+
+
+  *
+      To get the needed sample size after correction for population size (n =
+      1500):
+
+            cunegonde:~>sampsize -e 5 -pop 1500
+
+      Assumptions:
+
+           Precision          = 5.00  %
+           Prevalence         = 50.00 %
+           Population size    = 1500
+
+              95% Confidence Interval specified limits [  45%   --   55% ]
+              (these limits equal prevalence plus or minus precision)
+
+      Estimated sample size:
+                            n =      306
+
+  *
+      Assuming a prevalence of 10%, a precision of 4% estimated using a 90%
+      confidence interval, and a target population size of 2500:
+
+            cunegonde:~>sampsize -pr 10 -e 4 -pop 2500 -level 90
+
+      Assumptions:
+
+           Precision          = 4.00  %
+           Prevalence         = 10.00 %
+           Population size    = 2500
+
+              90% Confidence Interval specified limits [   6%   --   14% ]
+              (these limits equal prevalence plus or minus precision)
+
+      Estimated sample size:
+                            n =      144
+
+  *
+      Assuming that the observed prevalence in the sample will be null, for a
+      97.5% one-sided confidence interval upper limit that is equal to the
+      entered precision (2% in this example), type:
+
+            cunegonde:~>sampsize -pr 0 -e 2
+
+      Assumptions:
+
+           Precision          = 2.00  %
+           Prevalence         = 0.00 %
+           Population size    = infinite
+
+      A null prevalence was entered, we assume here that the observed
+      prevalence in the sample will be null, and compute the sample
+      size for an upper limit of the confidence interval equal to the
+      entered precision. The population size is not taken into account
+      even if a finite size was entered. Sample sizes are calculated
+      using the binomial exact method.
+
+            97.5% one-sided Confidence Interval upper limit = 2.00
+
+      Estimated sample size:
+                            n =        183
+
+  *
+      Assuming that the observed prevalence in the sample will be null, for 95%
+      one-sided confidence interval upper limit equal to the entered precision
+      (2% in this example), type:
+
+            cunegonde:~>sampsize -pr 0 -e 2 -level 90
+
+      Assumptions:
+
+           Precision          = 2.00  %
+           Prevalence         = 0.00 %
+           Population size    = infinite
+
+      A null prevalence was entered, we assume here that the observed
+      prevalence in the sample will be null, and compute the sample
+      size for an upper limit of the confidence interval equal to the
+      entered precision. The population size is not taken into account
+      even if a finite size was entered. Sample sizes are calculated
+      using the binomial exact method.
+
+              95% one-sided Confidence Interval upper limit = 2.00
+
+      Estimated sample size:
+                            n =        149
+
+  *
+      A study on the hepatitis C virus aims at describing some characteristics
+      of the virus strains. It is assumed that the prevalence of virus positive
+      individuals is 10% in the population. The investigators wish to calculate
+      the sample size needed to be 95% sure that at least 5 patients will
+      harbour a virus.
+
+            cunegonde:~>sampsize -nob 5 -pr 10
+
+      Assumptions:
+
+         prevalence                  =       10%
+         minimum number of successes =       5  in the sample
+         with probability            =       95%
+
+      Estimated sample size:
+                                   n =       90
+
+  *
+      You flip a coin 10 times and it comes up heads only once. You are shocked
+      and decide to obtain a 99% confidence interval for this coin:
+
+            cunegonde:~>sampsize -bi 10 1
+
+      Assumptions:
+
+         number of observations = 10
+         number of successes    = 1
+
+      Binomial Exact   95% Confidence Interval:
+         [0.252858% -- 44.5016%]
+ 
+
+***** Comparative studies of proportions *****
+
+  *
+      Someone claims that US females are more likely than US males to study
+      French. Our null hypothesis is that the proportion of female French
+      students is 0.5. We wish to compute the sample size that will give us a
+      80% power to reject the null hypothesis if the true proportion of female
+      French students is 75%.
+
+            cunegonde:~>sampsize -cp 50 75 -power 80 -onesample
+
+      Estimated sample size for one-sample comparison of percentage to
+      hypothesized value
+
+      Test Ho:     p =         50%, where p is the percentage in the population
+
+      Assumptions:
+               alpha =          5% (two-sided)
+               power =         80%
+       alternative p =         75%
+
+      Estimated sample size:
+                   n =         29
+
+  *
+      We want to conduct a survey on people's opinions of the President's
+      performance. Specifically, we want to determine whether members of the
+      President's party have a different opinion from people with another party
+      affiliation. We estimate that only 25% of members of the President's
+      party will say that the President is doing a poor job, whereas 40% of
+      other parties will rate the President's performance as poor. We compute
+      the sample size for alpha = 5% (two-sided) and power = 90%:
+
+            cunegonde:~>sampsize -cp 25 40
+
+      Estimated sample size for two-sample comparison of percentages
+
+      Test H:    p1 = p2, where p1 is the percentage in population 1
+      and p2 is the percentage in population 2
+
+      Assumptions:
+              alpha =          5% (two-sided)
+              power =         90%
+                 p1 =         25%
+                 p2 =         40%
+
+      Estimated sample size:
+                 n1 =        216
+                 n2 =        216
+
+  *
+      Following the calculation for the survey on the President's performance,
+      we realize that we can sample only n1 = 300 members of the President's
+      party and a sample of n2 = 150 members of other parties, due to time
+      constraints. We wish to compute the power of our survey:
+
+            cunegonde:~>sampsize -n 300 -cp 25 40 -c 0.5
+
+      Estimated power for two-sample comparison of percentages
+
+      Test Ho:    p1 = p2, where p1 is the percentage in the population 1
+      and p2 is the percentage in the population 2
+
+      Assumptions:
+
+               alpha =          5 (two-sided)
+                  p1 =         25%
+                  p2 =         40%
+      sample size n1 =        300
+      sample size n2 =        150
+               n2/n1 =        0.5
+
+      Estimated power:
+
+              power =    87.8976%
+
+  *
+      We wish to study the proportion of patients who have not recovered from a
+      back pain by 4 weeks, and compare the outcome between patients in whom
+      sciatica was diagnosed and patients without sciatica. We know that
+      typically, about 20% of acute low back pain patients have not recovered
+      by 4 weeks and think that the percentage may be 30% for patients who also
+      have sciatica. The sample size we would need to detect this difference
+      between the two groups, with a two-sided alpha of 5% and a power or 80%
+      is 313:
+
+            cunegonde:~>sampsize -cp 20 30 -power 80
+
+      Estimated sample size for two-sample comparison of percentages
+
+      Test H:    p1 = p2, where p1 is the percentage in population 1
+      and p2 is the percentage in population 2
+
+      Assumptions:
+              alpha =          5% (two-sided)
+              power =         80%
+                 p1 =         20%
+                 p2 =         30%
+
+      Estimated sample size:
+                 n1 =        313
+                 n2 =        313
+
+  *
+      Now we look at the same example using 10 observations per cluster and an
+      intraclass correlation of 0.1:
+
+            cunegonde:~>sampsize -cp 20 30 -power 80 -obsclus 10 -rho 0.1
+
+      Estimated sample size for two-sample comparison of percentages
+
+      Test H:    p1 = p2, where p1 is the percentage in population 1
+      and p2 is the percentage in population 2
+
+      Assumptions:
+              alpha =          5% (two-sided)
+              power =         80%
+                 p1 =         20%
+                 p2 =         30%
+
+      Estimated sample size:
+                 n1 =        313
+                 n2 =        313
+
+
+      Sample size adjusted for cluster design:
+
+        Intraclass correlation     =        0.1
+        Average obs. per cluster   =         10
+        Minimum number of clusters =        119
+
+      Estimated sample size per group:
+
+                 n1 (corrected)    =        595
+                 n2 (corrected)    =        595
+
+  *
+      Taking into account the cluster design of the study, our samples have
+      increased to 595 per group and a total of 119 physicians (clusters).
+      Finally, we try the calculation assuming only 40 physicians:
+
+            cunegonde:~>sampsize -cp 20 30 -power 80 -numclus 40 -rho 0.1
+
+      Sample size adjusted for cluster design:
+
+      Error: for rho =        0.1, the minimum number of clusters possible is:
+             numclus =         63
+
+  *
+      We got an error message telling us that, given these sets of sample size
+      parameters, it is not possible to estimate a sample size with fewer than
+      63 clusters. We need to rerun sampsize with different parameters in order
+      to get a manageable number of patients.
+
+            cunegonde:~>sampsize -cp 20 30 -power 80 -numclus 40 -rho 0.05
+
+      Sample size adjusted for cluster design:
+
+        Intraclass correlation     =       0.05
+        Average obs. per cluster   =         69
+        Minimum number of clusters =         40
+
+      Estimated sample size per group:
+
+                 n1 (corrected)    =       1378
+                 n2 (corrected)    =       1378
+ 
+
+***** Comparative studies of means *****
+
+  *
+      We wish to test the effects of a low-fat diet on serum cholesterol
+      levels. We will measure the difference in cholesterol level for each
+      subject before and after being on the diet. Since there is only one group
+      of subjects, all on diet, this is a one-sample test. Our null hypothesis
+      is that the mean of individual differences in cholesterol level will be
+      zero; i.e., mdiff = 0mg/100ml. If the effect of the diet is as large as a
+      mean difference of -10mg/100ml, then we wish to have power of 95% for
+      rejecting the null hypothesis. Since we expect a reduction in levels, we
+      want to use a one-sided test with alpha = 2.5%. Based on past studies, we
+      estimate that the standard deviation of the difference in cholesterol
+      levels will be about 20mg/100ml:
+
+            cunegonde:~>sampsize -means 0 -10 20 -onesample -alpha 2.5 -
+            onesided -power 95
+
+
+      Estimated sample size for one-sample comparison of mean to
+      hypothesized value
+
+      Test Ho:    m =          0, where m is the mean in the population
+
+      Assumptions:
+              alpha =        2.5 (one-sided)
+              power =         95
+      alternative m =        -10
+                 sd =         20
+
+      Estimated sample size:
+                  n =         52
+
+  *
+      We decide to conduct the cholesterol study with n = 60 subjects, an we
+      wonder what the power will be at a one-sided significance level of alpha
+      = 1%:
+
+            cunegonde:~>sampsize -n 60 -means 0 -10 20 -onesample -onesided -
+            alpha 1
+
+
+      Estimated power for one-sample comparison of mean
+      to hypothesized value
+
+      Test Ho:    m =          0%, where m is the mean in the population
+
+      Assumptions:
+
+              alpha =          1% (one-sided)
+      alternative m =        -10
+                 sd =         20
+        sample size =         60
+
+
+      Estimated power:
+
+              power =    93.9024%
+
+  *
+      We are doing a study of the relationship of oral contraceptives (OC) and
+      blood pressure (BP) level for women ages 35-39. From a pilot study, it
+      was determined that the mean and standard deviation BP of OC users were
+      132.86 and 15.34, respectively. The mean and standard deviation BP of OC
+      users were 127.44 and 18.23. Since it is easier to find OC nonusers than
+      users in the country were the study is conducted, we decide that n2, the
+      size of the sample of OC users, should be twice n1, the size of the
+      sample of OC users; that is, c = n2/n1 = 2. To compute the sample sizes
+      for alpha = 5% (two-sided) and the power of 80%:
+
+            cunegonde:~>sampsize -means 132.86 127.44 15.34 18.23 -power 80 -
+            c 2
+
+
+      Estimated sample size for two-sample comparison of means
+
+      Test Ho:   m1 = m2, where m1 is the mean in population 1
+      and m2 is the mean in population 2
+
+      Assumptions:
+
+              alpha =          5 (two-sided)
+              power =         80
+                 m1 =     132.86
+                 m2 =     127.44
+                sd1 =      15.34
+                sd2 =      18.23
+              n2/n1 =          2
+
+      Estimated sample size:
+
+                 n1 =        108
+                 n2 =        216
+
+  *
+      We now find that we only have enough money to study 100 subjects from
+      each group for the above oral contraceptives study. We can compute the
+      power for n1 = n2 = 100
+
+            cunegonde:~>sampsize -n 100 -means 132.86 127.44 15.34 18.23
+
+      Estimated power for two-sample comparison of means
+
+      Test Ho:    m1 = m2, where m1 is the mean in the population 1
+      and m2 is the mean in the population 2
+
+      Assumptions:
+
+               alpha =          5% (two-sided)
+                  m1 =     132.86
+                  m2 =     127.44
+                 sd1 =      15.34
+                 sd2 =      18.23
+      sample size n1 =        100
+      sample size n2 =        100
+               n2/n1 =          1
+
+      Estimated power:
+
+               power =    62.3601%
+
+  *
+      Patients for the study on oral contraceptives and blood pressure will be
+      recruited in 12 clinics, and we suspect some intraclass correlation
+      (patients recruited in the same clinic are more alike than patients
+      recruited from different clinics). Due to the cluster sampling design,
+      patients are not independant observations, and we wish to correct the
+      above sample size (sampsize returned a sample size of 108 in the first
+      group, and 216 in the second group). We think that the intraclass
+      correlation is fairly small (0.02), and compute:
+
+            cunegonde:~>sampsize -means 132.86 127.44 15.34 18.23 -power 80 -
+            c 2 -numclus 12 -rho 0.02
+
+
+      Estimated sample size for two-sample comparison of means
+
+      Test Ho:   m1 = m2, where m1 is the mean in population 1
+      and m2 is the mean in population 2
+
+      Assumptions:
+
+              alpha =          5 (two-sided)
+              power =         80
+                 m1 =     132.86
+                 m2 =     127.44
+                sd1 =      15.34
+                sd2 =      18.23
+              n2/n1 =          2
+
+      Estimated sample size:
+
+                 n1 =        108
+                 n2 =        216
+
+
+      Sample size adjusted for cluster design:
+
+        Intraclass correlation     =       0.02
+        Average obs. per cluster   =         58
+        Minimum number of clusters =         12
+
+      Estimated sample size per group:
+
+                 n1 (corrected)    =        232
+                 n2 (corrected)    =        464
+      The design effect is rather important despite a small intraclass
+      correlation, due to the small number of clusters. Sampsize returned n1 =
+      232 and n2 = 464, more than twice the initial sample size.
+ 
+
+***** Case-Control Studies *****
+
+  *
+      We wish to conduct a case control study to assess whether bladder cancer
+      is associated with past exposure to cigarette smoking. Cases will be
+      patients with bladder cancer and controls will be patients hospitalized
+      for injury. It is assumed that 20% of controls will be smokers or past
+      smokers, and we wish to detect an odds-ratio of 2 with power 90%. Three
+      controls will be recruited for one case:
+
+            cunegonde:~>sampsize -or 2 -exp 20 -c 3
+
+      Assumptions:
+
+           Odds ratio             =          2
+           Exposed controls       =         20%
+           Alpha risk             =          5%
+           Power                  =         90%
+           Controls / Case ratio  =          3
+
+           Total exposed          =    23.3333%
+
+      Estimated sample size:
+
+           Number of cases        =        150
+           Number of controls     =        450
+
+           Total                  =        600
+
+  *
+      The above study on bladder cancer needed a total sample size of 600. An
+      alternative is to conduct a matched case-control study of bladder cancer
+      and cigarette smoking rather than the above unmatched study design. One
+      case will be matched to one control. Again, the percentage of exposed
+      controls is 20%, and we wish to detect a two-fold increased risk (OR =
+      2). With these specifications, we need 226 pairs (total sample size 452).
+
+            cunegonde:~>sampsize -or 2 -exp 20 -matched
+
+      Assumptions:
+
+           Odds ratio             =          2
+           Exposed controls       =         20%
+           Alpha risk             =          5%
+           Power                  =         90%
+           Probability of an
+        exposure-discordant pair  =         40%
+
+      Estimated sample size (number of pairs):
+
+           Number of exposure discordant-pairs  =         91
+           Number of pairs                      =        226
+           Total sample size                    =        452
+
+  *
+      The following table (Kline et al., 1978) shows previous induced abortions
+      among multigravid cases and controls. (Primiigravidae were excluded since
+      these women did not have prior pregnancies.):
+       ___________________________
+      |______|Spontaneous|Controls|
+      |______|_abortions_|________|
+      |PIA:__|___________|________|
+      |___yes|______171__|____90__|
+      |____no|______303__|___165__|
+      |Total:|______474__|___255__|
+      The power of the study for detecting a relative risk of R = 1.5 is
+      calculated as follows:  [$c = 255/474 = 0.538$], percentage exposed in
+      controls =  [$100\times90/255 = 35.29$]:
+
+            cunegonde:~>sampsize -or 1.5 -exp 35.29 -c 0.538 -n 474
+
+      Assumptions:
+
+           Odds ratio             =        1.5
+           Exposed controls       =      35.29%
+           Alpha risk             =          5%
+           Controls / Case ratio  =      0.538
+
+           Total exposed          =    41.6005%
+
+           Number of cases        =        474
+           Number of controls     =        255
+
+           Total                  =        729
+
+      Estimated power:
+
+                            power =    72.0774%
+
+  *
+      Kessler and Clark (1978) studied 365 males with bladder cancer and an
+      equal number of controls, 35 percent of whom reported past use of
+      nonnutritive sweeteners. Using a one-sided test at the alpha = 5% level,
+      the smallest relative risk greater than one that can be detected with 90%
+      power is RR = 1.55:
+
+            cunegonde:~>sampsize -n 365 -exp 35 -onesided
+
+      Assumptions:
+
+           Exposed controls       =         35%
+           One-sided alpha risk   =          5%
+           Power                  =         90
+           Number of cases        =        365
+           Number of controls     =        365
+
+           Total                  =        730
+
+      Estimated smallest and highest detectable odds-ratio:
+
+         Highest  odds-ratio < 1  =   0.623181
+         Smallest odds-ratio > 1  =    1.55439
+
+***** Equivalence trials *****
+
+  *
+      Researchers want to show that a new treatment is "as good as" the
+      standard one. The success rates of both treatments are expected to be
+      approximately 90%. The researchers want to be sure that the new treatment
+      is no worse than the standard treatment by an amount of 10%. Then, the
+      sample size for each treatment group is 155 patients:
+
+            cunegonde:~>sampsize -cp 90 90 -d 10
+
+Estimated sample size for two-sample non-inferiority comparison of percentages
+
+Test H0:    p2 < p1 - delta, where p1 is the percentage in population 1,
+p2 is the percentage in population 2, and delta is the critical value
+
+Assumptions:
+        alpha =          5% (two-sided)
+        power =         90%
+           p1 =         90%
+           p2 =         90%
+        delta =         10%
+
+Estimated sample size per group:
+           n =        155
+
+
+
+
+  
+===============================================================================
+ 
+  Copyright (C) 2003 Philippe Glaziou
+
+  sampsize is free software; you can redistribute it and/or modify
+  it under the terms of the GNU General Public License as published by
+  the Free Software Foundation; either version 2 of the License, or
+  (at your option) any later version.
+
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU General Public License for more details.
+
+  You should have received a copy of the GNU General Public License
+  along with this program; if not, write to the Free Software
+  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+
+===============================================================================
+Comments are welcome.
+
+-- Philippe Glaziou <glaziou@pasteur-kh.org>

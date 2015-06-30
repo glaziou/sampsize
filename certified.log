@@ -1,0 +1,1996 @@
+./sampsize -e 5
+
+Assumptions:
+
+     Precision          = 5.00  %
+     Prevalence         = 50.00 %
+     Population size    = infinite
+
+        95% Confidence Interval specified limits [  45%   --   55% ]
+	(these limits equal prevalence plus or minus precision)
+
+Estimated sample size:
+                      n =      385
+
+        95% Binomial Exact Confidence Interval with n =      385
+	and n * prevalence =    193 observed events:
+	[45.0212%   -- 55.2365% ]
+
+./sampsize -e 5 -pr 10
+
+Assumptions:
+
+     Precision          = 5.00  %
+     Prevalence         = 10.00 %
+     Population size    = infinite
+
+        95% Confidence Interval specified limits [   5%   --   15% ]
+	(these limits equal prevalence plus or minus precision)
+
+Estimated sample size:
+                      n =      139
+
+        95% Binomial Exact Confidence Interval with n =      139
+	and n * prevalence =     14 observed events:
+	[5.61669%   -- 16.3214% ]
+
+./sampsize -e 5 -pr 99
+
+Assumptions:
+
+     Precision          = 5.00  %
+     Prevalence         = 99.00 %
+     Population size    = infinite
+
+        95% Confidence Interval specified limits [  94%   --  100% ]
+	(these limits equal prevalence plus or minus precision)
+
+Estimated sample size:
+                      n =       16
+
+        95% Binomial Exact Confidence Interval with n =       16
+	and n * prevalence =     16 observed events:
+	[79.4093%   --    100% ]
+
+
+Warning: #succ or (sample size - #succ) < 5
+You may try different combinations of #obs and #succ
+and assess binomial exact confidence intervals.
+
+./sampsize -e 0.01 -pr 0.01
+
+Assumptions:
+
+     Precision          = 0.01  %
+     Prevalence         = 0.01 %
+     Population size    = infinite
+
+        95% Confidence Interval specified limits [   0%   -- 0.02% ]
+	(these limits equal prevalence plus or minus precision)
+
+Estimated sample size:
+                      n =    38411
+
+        95% Binomial Exact Confidence Interval with n =    38411
+	and n * prevalence =      4 observed events:
+	[0.00283745%   -- 0.026661% ]
+
+
+Warning: #succ or (sample size - #succ) < 5
+You may try different combinations of #obs and #succ
+and assess binomial exact confidence intervals.
+
+./sampsize -e 0.01 -pr 0.01 -level 99
+
+Assumptions:
+
+     Precision          = 0.01  %
+     Prevalence         = 0.01 %
+     Population size    = infinite
+
+        99% Confidence Interval specified limits [   0%   -- 0.02% ]
+	(these limits equal prevalence plus or minus precision)
+
+Estimated sample size:
+                      n =    66343
+
+        99% Binomial Exact Confidence Interval with n =    66343
+	and n * prevalence =      7 observed events:
+	[0.00307101%   -- 0.0258238% ]
+
+./sampsize -nob 2 -pr 1
+
+Assumptions:
+
+   prevalence                  =        1%
+   minimum number of successes =       2  in the sample
+   with probability            =       95%
+
+Estimated sample size:
+                             n =      473
+
+./sampsize -nob 20 -pr 0.01
+
+Assumptions:
+
+   prevalence                  =     0.01%
+   minimum number of successes =       20  in the sample
+   with probability            =       95%
+
+Estimated sample size:
+                             n =   278789
+
+./sampsize -nob 100 -pr 0.0001
+
+Assumptions:
+
+   prevalence                  =    1e-04%
+   minimum number of successes =       100  in the sample
+   with probability            =       95%
+
+Estimated sample size:
+                             n = 1.16997e+08
+
+./sampsize -nob 100 -pr 0.0001 -level 99.999
+
+Assumptions:
+
+   prevalence                  =    1e-04%
+   minimum number of successes =       100  in the sample
+   with probability            =   99.999%
+
+Estimated sample size:
+                             n = 1.48494e+08
+
+./sampsize -nob 10000 -pr 1 -level 51
+
+Assumptions:
+
+   prevalence                  =        1%
+   minimum number of successes =       10000  in the sample
+   with probability            =       51%
+
+Estimated sample size:
+                             n = 1.00022e+06
+
+./sampsize -nob 10000 -pr 1 -level 99
+
+Assumptions:
+
+   prevalence                  =        1%
+   minimum number of successes =       10000  in the sample
+   with probability            =       99%
+
+Estimated sample size:
+                             n = 1.02329e+06
+
+./sampsize -bi 100 0
+
+Assumptions:
+
+   number of observations = 100
+   number of successes    = 0
+
+Binomial Exact one-sided 97.5% Confidence Interval: 
+   [     0% -- 3.62167%]
+
+./sampsize -bi 100000000 50000000
+
+Assumptions:
+
+   number of observations = 100000000
+   number of successes    = 50000000
+
+Binomial Exact   95% Confidence Interval: 
+   [49.9902% -- 50.0098%]
+
+./sampsize -bi 100000000 50000000 -level 99.99
+
+Assumptions:
+
+   number of observations = 100000000
+   number of successes    = 50000000
+
+Binomial Exact 99.99% Confidence Interval: 
+   [49.9805% -- 50.0195%]
+
+./sampsize -bi 100000000 50000000 -level 55
+
+Assumptions:
+
+   number of observations = 100000000
+   number of successes    = 50000000
+
+Binomial Exact   55% Confidence Interval: 
+   [49.9962% -- 50.0038%]
+
+./sampsize -bi 12 4
+
+Assumptions:
+
+   number of observations = 12
+   number of successes    = 4
+
+Binomial Exact   95% Confidence Interval: 
+   [9.92461% -- 65.1124%]
+
+./sampsize -cp 1 99
+
+Estimated sample size for two-sample comparison of percentages
+
+Test H:    p1 = p2, where p1 is the percentage in population 1
+and p2 is the percentage in population 2
+
+Assumptions:
+        alpha =          5% (two-sided)
+        power =         90%
+           p1 =          1%
+           p2 =         99%
+
+Estimated sample size:
+           n1 =          3
+           n2 =          3
+
+./sampsize -cp 5 15 -onesided
+
+Estimated sample size for two-sample comparison of percentages
+
+Test H:    p1 = p2, where p1 is the percentage in population 1
+and p2 is the percentage in population 2
+
+Assumptions:
+        alpha =          5% (one-sided)
+        power =         90%
+           p1 =          5%
+           p2 =         15%
+
+Estimated sample size:
+           n1 =        153
+           n2 =        153
+
+./sampsize -cp 0 30 -onesample
+
+Estimated sample size for one-sample comparison of percentage to
+hypothesized value
+
+Test Ho:     p =          0%, where p is the percentage in the population
+
+Assumptions:
+         alpha =          5% (two-sided)
+         power =         90%
+ alternative p =         30%
+
+Estimated sample size:
+             n =          4
+
+./sampsize -cp 20 0 -onesided -onesample
+
+Estimated sample size for one-sample comparison of percentage to
+hypothesized value
+
+Test Ho:     p =         20%, where p is the percentage in the population
+
+Assumptions:
+         alpha =          5% (one-sided)
+         power =         90%
+ alternative p =          0%
+
+Estimated sample size:
+             n =         11
+
+./sampsize -cp 34 35 -alpha 1
+
+Estimated sample size for two-sample comparison of percentages
+
+Test H:    p1 = p2, where p1 is the percentage in population 1
+and p2 is the percentage in population 2
+
+Assumptions:
+        alpha =          1% (two-sided)
+        power =         90%
+           p1 =         34%
+           p2 =         35%
+
+Estimated sample size:
+           n1 =      67245
+           n2 =      67245
+
+./sampsize -cp 34 35 -alpha 1 -c 3
+
+Estimated sample size for two-sample comparison of percentages
+
+Test H:    p1 = p2, where p1 is the percentage in population 1
+and p2 is the percentage in population 2
+
+Assumptions:
+        alpha =          1% (two-sided)
+        power =         90%
+           p1 =         34%
+           p2 =         35%
+
+Estimated sample size:
+           n1 =      44881
+           n2 =     134642
+
+./sampsize -cp 34 35 -alpha 1 -c 1000001
+
+Estimated sample size for two-sample comparison of percentages
+
+Test H:    p1 = p2, where p1 is the percentage in population 1
+and p2 is the percentage in population 2
+
+Assumptions:
+        alpha =          1% (two-sided)
+        power =         90%
+           p1 =         34%
+           p2 =         35%
+
+Estimated sample size:
+           n1 =      33698
+           n2 = 3.36971e+10
+
+./sampsize -cp 99 100 -alpha 0.5 -c 2.3 -onesided
+
+Estimated sample size for two-sample comparison of percentages
+
+Test H:    p1 = p2, where p1 is the percentage in population 1
+and p2 is the percentage in population 2
+
+Assumptions:
+        alpha =        0.5% (one-sided)
+        power =         90%
+           p1 =         99%
+           p2 =        100%
+
+Estimated sample size:
+           n1 =        883
+           n2 =       2031
+
+./sampsize -cp 34 35 -alpha 1 -cc
+
+Estimated sample size for two-sample comparison of percentages
+
+Test H:    p1 = p2, where p1 is the percentage in population 1
+and p2 is the percentage in population 2
+
+Assumptions:
+        alpha =          1% (two-sided)
+        power =         90%
+           p1 =         34%
+           p2 =         35%
+
+Estimated sample size (with continuity correction):
+           n1 =      67445
+           n2 =      67445
+
+./sampsize -cp 34 35 -alpha 1 -c 3 -cc
+
+Estimated sample size for two-sample comparison of percentages
+
+Test H:    p1 = p2, where p1 is the percentage in population 1
+and p2 is the percentage in population 2
+
+Assumptions:
+        alpha =          1% (two-sided)
+        power =         90%
+           p1 =         34%
+           p2 =         35%
+
+Estimated sample size (with continuity correction):
+           n1 =      45014
+           n2 =     135042
+
+./sampsize -cp 34 35 -alpha 1 -c 1000001 -cc
+
+Estimated sample size for two-sample comparison of percentages
+
+Test H:    p1 = p2, where p1 is the percentage in population 1
+and p2 is the percentage in population 2
+
+Assumptions:
+        alpha =          1% (two-sided)
+        power =         90%
+           p1 =         34%
+           p2 =         35%
+
+Estimated sample size (with continuity correction):
+           n1 =      33797
+           n2 = 3.3797e+10
+
+./sampsize -cp 99 100 -alpha 0.5 -c 2.3 -onesided -cc
+
+Estimated sample size for two-sample comparison of percentages
+
+Test H:    p1 = p2, where p1 is the percentage in population 1
+and p2 is the percentage in population 2
+
+Assumptions:
+        alpha =        0.5% (one-sided)
+        power =         90%
+           p1 =         99%
+           p2 =        100%
+
+Estimated sample size (with continuity correction):
+           n1 =       1022
+           n2 =       2351
+
+./sampsize -means 10 10 5 5
+
+Estimated sample size for two-sample comparison of means
+
+Test Ho:   m1 = m2, where m1 is the mean in population 1
+and m2 is the mean in population 2
+
+Assumptions: 
+
+        alpha =          5 (two-sided)
+        power =         90
+           m1 =         10
+           m2 =         10
+          sd1 =          5
+          sd2 =          5
+        n2/n1 =          1
+
+Estimated sample size:
+
+           n1 =        inf
+           n2 =        inf
+
+./sampsize -means 10 11 5 4
+
+Estimated sample size for two-sample comparison of means
+
+Test Ho:   m1 = m2, where m1 is the mean in population 1
+and m2 is the mean in population 2
+
+Assumptions: 
+
+        alpha =          5 (two-sided)
+        power =         90
+           m1 =         10
+           m2 =         11
+          sd1 =          5
+          sd2 =          4
+        n2/n1 =          1
+
+Estimated sample size:
+
+           n1 =        431
+           n2 =        431
+
+./sampsize -means 10 11 5 0
+
+Estimated sample size for two-sample comparison of means
+
+Test Ho:   m1 = m2, where m1 is the mean in population 1
+and m2 is the mean in population 2
+
+Assumptions: 
+
+        alpha =          5 (two-sided)
+        power =         90
+           m1 =         10
+           m2 =         11
+          sd1 =          5
+          sd2 =          5
+        n2/n1 =          1
+
+Estimated sample size:
+
+           n1 =        526
+           n2 =        526
+
+./sampsize -means 10 11 5 0 -alpha 1
+
+Estimated sample size for two-sample comparison of means
+
+Test Ho:   m1 = m2, where m1 is the mean in population 1
+and m2 is the mean in population 2
+
+Assumptions: 
+
+        alpha =          1 (two-sided)
+        power =         90
+           m1 =         10
+           m2 =         11
+          sd1 =          5
+          sd2 =          5
+        n2/n1 =          1
+
+Estimated sample size:
+
+           n1 =        744
+           n2 =        744
+
+./sampsize -means 10 10 5 5 -cc
+
+Estimated sample size for two-sample comparison of means
+
+Test Ho:   m1 = m2, where m1 is the mean in population 1
+and m2 is the mean in population 2
+
+Assumptions: 
+
+        alpha =          5 (two-sided)
+        power =         90
+           m1 =         10
+           m2 =         10
+          sd1 =          5
+          sd2 =          5
+        n2/n1 =          1
+
+Estimated sample size:
+
+           n1 =        inf
+           n2 =        inf
+
+./sampsize -means 10 11 5 4 -cc
+
+Estimated sample size for two-sample comparison of means
+
+Test Ho:   m1 = m2, where m1 is the mean in population 1
+and m2 is the mean in population 2
+
+Assumptions: 
+
+        alpha =          5 (two-sided)
+        power =         90
+           m1 =         10
+           m2 =         11
+          sd1 =          5
+          sd2 =          4
+        n2/n1 =          1
+
+Estimated sample size:
+
+           n1 =        431
+           n2 =        431
+
+./sampsize -means 10 11 5 0 -cc
+
+Estimated sample size for two-sample comparison of means
+
+Test Ho:   m1 = m2, where m1 is the mean in population 1
+and m2 is the mean in population 2
+
+Assumptions: 
+
+        alpha =          5 (two-sided)
+        power =         90
+           m1 =         10
+           m2 =         11
+          sd1 =          5
+          sd2 =          5
+        n2/n1 =          1
+
+Estimated sample size:
+
+           n1 =        526
+           n2 =        526
+
+./sampsize -means 10 11 5 0 -alpha 1 -cc
+
+Estimated sample size for two-sample comparison of means
+
+Test Ho:   m1 = m2, where m1 is the mean in population 1
+and m2 is the mean in population 2
+
+Assumptions: 
+
+        alpha =          1 (two-sided)
+        power =         90
+           m1 =         10
+           m2 =         11
+          sd1 =          5
+          sd2 =          5
+        n2/n1 =          1
+
+Estimated sample size:
+
+           n1 =        744
+           n2 =        744
+
+./sampsize -means 10 11 5 0 -alpha 3 -onesided
+
+Estimated sample size for two-sample comparison of means
+
+Test Ho:   m1 = m2, where m1 is the mean in population 1
+and m2 is the mean in population 2
+
+Assumptions: 
+
+        alpha =          3 (one-sided)
+        power =         90
+           m1 =         10
+           m2 =         11
+          sd1 =          5
+          sd2 =          5
+        n2/n1 =          1
+
+Estimated sample size:
+
+           n1 =        501
+           n2 =        501
+
+./sampsize -means 10 13 5 0 -onesided
+
+Estimated sample size for two-sample comparison of means
+
+Test Ho:   m1 = m2, where m1 is the mean in population 1
+and m2 is the mean in population 2
+
+Assumptions: 
+
+        alpha =          5 (one-sided)
+        power =         90
+           m1 =         10
+           m2 =         13
+          sd1 =          5
+          sd2 =          5
+        n2/n1 =          1
+
+Estimated sample size:
+
+           n1 =         48
+           n2 =         48
+
+./sampsize -means 10 12 1.1 100
+
+Estimated sample size for two-sample comparison of means
+
+Test Ho:   m1 = m2, where m1 is the mean in population 1
+and m2 is the mean in population 2
+
+Assumptions: 
+
+        alpha =          5 (two-sided)
+        power =         90
+           m1 =         10
+           m2 =         12
+          sd1 =        1.1
+          sd2 =        100
+        n2/n1 =          1
+
+Estimated sample size:
+
+           n1 =      26272
+           n2 =      26272
+
+./sampsize -means 10 14 5 -onesample
+
+Estimated sample size for one-sample comparison of mean to
+hypothesized value
+
+Test Ho:    m =         10, where m is the mean in the population
+
+Assumptions:
+        alpha =          5 (two-sided)
+        power =         90
+alternative m =         14
+           sd =          5
+
+Estimated sample size:
+            n =         17
+
+./sampsize -means 10 13 5 -onesample -onesided
+
+Estimated sample size for one-sample comparison of mean to
+hypothesized value
+
+Test Ho:    m =         10, where m is the mean in the population
+
+Assumptions:
+        alpha =          5 (one-sided)
+        power =         90
+alternative m =         13
+           sd =          5
+
+Estimated sample size:
+            n =         24
+
+./sampsize -means 10 12 5 -onesample -onesided -alpha 1
+
+Estimated sample size for one-sample comparison of mean to
+hypothesized value
+
+Test Ho:    m =         10, where m is the mean in the population
+
+Assumptions:
+        alpha =          1 (one-sided)
+        power =         90
+alternative m =         12
+           sd =          5
+
+Estimated sample size:
+            n =         82
+
+./sampsize -means 10 12 5 5 -power 99
+
+Estimated sample size for two-sample comparison of means
+
+Test Ho:   m1 = m2, where m1 is the mean in population 1
+and m2 is the mean in population 2
+
+Assumptions: 
+
+        alpha =          5 (two-sided)
+        power =         99
+           m1 =         10
+           m2 =         12
+          sd1 =          5
+          sd2 =          5
+        n2/n1 =          1
+
+Estimated sample size:
+
+           n1 =        230
+           n2 =        230
+
+./sampsize -means 10 11 5 4 -power 70
+
+Estimated sample size for two-sample comparison of means
+
+Test Ho:   m1 = m2, where m1 is the mean in population 1
+and m2 is the mean in population 2
+
+Assumptions: 
+
+        alpha =          5 (two-sided)
+        power =         70
+           m1 =         10
+           m2 =         11
+          sd1 =          5
+          sd2 =          4
+        n2/n1 =          1
+
+Estimated sample size:
+
+           n1 =        254
+           n2 =        254
+
+./sampsize -means 10 15 5 0 -power 99.9
+
+Estimated sample size for two-sample comparison of means
+
+Test Ho:   m1 = m2, where m1 is the mean in population 1
+and m2 is the mean in population 2
+
+Assumptions: 
+
+        alpha =          5 (two-sided)
+        power =       99.9
+           m1 =         10
+           m2 =         15
+          sd1 =          5
+          sd2 =          5
+        n2/n1 =          1
+
+Estimated sample size:
+
+           n1 =         52
+           n2 =         52
+
+./sampsize -means 10 14 5 0 -alpha 1 -power 78
+
+Estimated sample size for two-sample comparison of means
+
+Test Ho:   m1 = m2, where m1 is the mean in population 1
+and m2 is the mean in population 2
+
+Assumptions: 
+
+        alpha =          1 (two-sided)
+        power =         78
+           m1 =         10
+           m2 =         14
+          sd1 =          5
+          sd2 =          5
+        n2/n1 =          1
+
+Estimated sample size:
+
+           n1 =         36
+           n2 =         36
+
+./sampsize -means 10 16 5 0 -alpha 3 -onesided -power 97 -c 0.01
+
+Estimated sample size for two-sample comparison of means
+
+Test Ho:   m1 = m2, where m1 is the mean in population 1
+and m2 is the mean in population 2
+
+Assumptions: 
+
+        alpha =          3 (one-sided)
+        power =         97
+           m1 =         10
+           m2 =         16
+          sd1 =          5
+          sd2 =          5
+        n2/n1 =       0.01
+
+Estimated sample size:
+
+           n1 =        993
+           n2 =         10
+
+./sampsize -means 10 11 5 0 -onesided -power 99.999
+
+Estimated sample size for two-sample comparison of means
+
+Test Ho:   m1 = m2, where m1 is the mean in population 1
+and m2 is the mean in population 2
+
+Assumptions: 
+
+        alpha =          5 (one-sided)
+        power =     99.999
+           m1 =         10
+           m2 =         11
+          sd1 =          5
+          sd2 =          5
+        n2/n1 =          1
+
+Estimated sample size:
+
+           n1 =       1747
+           n2 =       1747
+
+./sampsize -means 10 12 1.1 100 -power 92 -c 33
+
+Estimated sample size for two-sample comparison of means
+
+Test Ho:   m1 = m2, where m1 is the mean in population 1
+and m2 is the mean in population 2
+
+Assumptions: 
+
+        alpha =          5 (two-sided)
+        power =         92
+           m1 =         10
+           m2 =         12
+          sd1 =        1.1
+          sd2 =        100
+        n2/n1 =         33
+
+Estimated sample size:
+
+           n1 =        862
+           n2 =      28446
+
+./sampsize -means 10 14 5 -onesample -power 57 -c 10000
+
+Estimated sample size for one-sample comparison of mean to
+hypothesized value
+
+Test Ho:    m =         10, where m is the mean in the population
+
+Assumptions:
+        alpha =          5 (two-sided)
+        power =         57
+alternative m =         14
+           sd =          5
+
+Estimated sample size:
+            n =          8
+
+./sampsize -means 10 14 5 -onesample -onesided -power 99
+
+Estimated sample size for one-sample comparison of mean to
+hypothesized value
+
+Test Ho:    m =         10, where m is the mean in the population
+
+Assumptions:
+        alpha =          5 (one-sided)
+        power =         99
+alternative m =         14
+           sd =          5
+
+Estimated sample size:
+            n =         25
+
+./sampsize -means 10 10 5 -onesample -onesided -alpha 1 -power 99
+
+Estimated sample size for one-sample comparison of mean to
+hypothesized value
+
+Test Ho:    m =         10, where m is the mean in the population
+
+Assumptions:
+        alpha =          1 (one-sided)
+        power =         99
+alternative m =         10
+           sd =          5
+
+Estimated sample size:
+            n =        inf
+
+./sampsize -cp 1 99 -n 300
+
+Estimated power for two-sample comparison of percentages
+
+Test Ho:    p1 = p2, where p1 is the percentage in the population 1
+and p2 is the percentage in the population 2
+
+Assumptions:
+
+         alpha =          5 (two-sided)
+            p1 =          1%
+            p2 =         99%
+sample size n1 =        300
+sample size n2 =        300
+         n2/n1 =          1
+
+Estimated power:
+
+        power =        100%
+
+./sampsize -cp 5 15 -onesided -n 20000 -c 3
+
+Estimated power for two-sample comparison of percentages
+
+Test Ho:    p1 = p2, where p1 is the percentage in the population 1
+and p2 is the percentage in the population 2
+
+Assumptions:
+
+         alpha =          5 (one-sided)
+            p1 =          5%
+            p2 =         15%
+sample size n1 =      20000
+sample size n2 =      60000
+         n2/n1 =          3
+
+Estimated power:
+
+        power =        100%
+
+./sampsize -cp 0 30 -onesample -n 300 -c 2
+
+Estimated power for one-sample comparison of percentage
+to hypothesized value
+
+Test Ho:    p =          0%, where p is the percentage in the population
+
+Assumptions:
+
+        alpha =          5% (two-sided)
+alternative p =         30%
+  sample size =        300
+
+Estimated power:
+
+        power =        100%
+
+./sampsize -cp 20 0 -onesided -onesample -n 20
+
+Estimated power for one-sample comparison of percentage
+to hypothesized value
+
+Test Ho:    p =         20%, where p is the percentage in the population
+
+Assumptions:
+
+        alpha =          5% (one-sided)
+alternative p =          0%
+  sample size =         20
+
+Estimated power:
+
+        power =        100%
+
+./sampsize -cp 34 35 -alpha 1 -n 1000
+
+Estimated power for two-sample comparison of percentages
+
+Test Ho:    p1 = p2, where p1 is the percentage in the population 1
+and p2 is the percentage in the population 2
+
+Assumptions:
+
+         alpha =          1 (two-sided)
+            p1 =         34%
+            p2 =         35%
+sample size n1 =       1000
+sample size n2 =       1000
+         n2/n1 =          1
+
+Estimated power:
+
+        power =    1.87794%
+
+./sampsize -cp 34 35 -alpha 1 -c 3 -n 49238
+
+Estimated power for two-sample comparison of percentages
+
+Test Ho:    p1 = p2, where p1 is the percentage in the population 1
+and p2 is the percentage in the population 2
+
+Assumptions:
+
+         alpha =          1 (two-sided)
+            p1 =         34%
+            p2 =         35%
+sample size n1 =      49238
+sample size n2 =     147714
+         n2/n1 =          3
+
+Estimated power:
+
+        power =    92.8525%
+
+./sampsize -cp 99 100 -alpha 0.5 -c 2.3 -onesided -n 100
+
+Estimated power for two-sample comparison of percentages
+
+Test Ho:    p1 = p2, where p1 is the percentage in the population 1
+and p2 is the percentage in the population 2
+
+Assumptions:
+
+         alpha =        0.5 (one-sided)
+            p1 =         99%
+            p2 =        100%
+sample size n1 =        100
+sample size n2 =        230
+         n2/n1 =        2.3
+
+Estimated power:
+
+        power =    24.5526%
+
+./sampsize -cp 34 35 -alpha 1 -c 1000001 -n 23
+
+Estimated power for two-sample comparison of percentages
+
+Test Ho:    p1 = p2, where p1 is the percentage in the population 1
+and p2 is the percentage in the population 2
+
+Assumptions:
+
+         alpha =          1 (two-sided)
+            p1 =         34%
+            p2 =         35%
+sample size n1 =         23
+sample size n2 =    2.3e+07
+         n2/n1 =      1e+06
+
+Estimated power:
+
+        power =   0.986712%
+
+./sampsize -means 10 10 5 5 -n 20
+
+Estimated power for two-sample comparison of means
+
+Test Ho:    m1 = m2, where m1 is the mean in the population 1
+and m2 is the mean in the population 2
+
+Assumptions:
+
+         alpha =          5% (two-sided)
+            m1 =         10
+            m2 =         10
+           sd1 =          5
+           sd2 =          5
+sample size n1 =         20
+sample size n2 =         20
+         n2/n1 =          1
+
+Estimated power:
+
+         power =          5%
+
+./sampsize -means 10 11 5 4 -n 10000000 -c 2.3
+
+Estimated power for two-sample comparison of means
+
+Test Ho:    m1 = m2, where m1 is the mean in the population 1
+and m2 is the mean in the population 2
+
+Assumptions:
+
+         alpha =          5% (two-sided)
+            m1 =         10
+            m2 =         11
+           sd1 =          5
+           sd2 =          4
+sample size n1 =      1e+07
+sample size n2 =    2.3e+07
+         n2/n1 =        2.3
+
+Estimated power:
+
+         power =        100%
+
+./sampsize -means 10 11 5 0 -n 23 -c 3293873729
+
+Estimated power for two-sample comparison of means
+
+Test Ho:    m1 = m2, where m1 is the mean in the population 1
+and m2 is the mean in the population 2
+
+Assumptions:
+
+         alpha =          5% (two-sided)
+            m1 =         10
+            m2 =         11
+           sd1 =          5
+           sd2 =          5
+sample size n1 =         23
+sample size n2 = 7.57591e+10
+         n2/n1 = 3.29387e+09
+
+Estimated power:
+
+         power =    16.0217%
+
+./sampsize -means 10 11 5 0 -alpha 1 -n 100
+
+Estimated power for two-sample comparison of means
+
+Test Ho:    m1 = m2, where m1 is the mean in the population 1
+and m2 is the mean in the population 2
+
+Assumptions:
+
+         alpha =          1% (two-sided)
+            m1 =         10
+            m2 =         11
+           sd1 =          5
+           sd2 =          5
+sample size n1 =        100
+sample size n2 =        100
+         n2/n1 =          1
+
+Estimated power:
+
+         power =    12.2729%
+
+./sampsize -means 10 11 5 0 -alpha 3 -onesided -n 100
+
+Estimated power for two-sample comparison of means
+
+Test Ho:    m1 = m2, where m1 is the mean in the population 1
+and m2 is the mean in the population 2
+
+Assumptions:
+
+         alpha =          3% (one-sided)
+            m1 =         10
+            m2 =         11
+           sd1 =          5
+           sd2 =          5
+sample size n1 =        100
+sample size n2 =        100
+         n2/n1 =          1
+
+Estimated power:
+
+         power =      32.04%
+
+./sampsize -means 10 13 5 0 -onesided -n 25
+
+Estimated power for two-sample comparison of means
+
+Test Ho:    m1 = m2, where m1 is the mean in the population 1
+and m2 is the mean in the population 2
+
+Assumptions:
+
+         alpha =          5% (one-sided)
+            m1 =         10
+            m2 =         13
+           sd1 =          5
+           sd2 =          5
+sample size n1 =         25
+sample size n2 =         25
+         n2/n1 =          1
+
+Estimated power:
+
+         power =    68.3129%
+
+./sampsize -means 10 12 1.1 100 -n 99
+
+Estimated power for two-sample comparison of means
+
+Test Ho:    m1 = m2, where m1 is the mean in the population 1
+and m2 is the mean in the population 2
+
+Assumptions:
+
+         alpha =          5% (two-sided)
+            m1 =         10
+            m2 =         12
+           sd1 =        1.1
+           sd2 =        100
+sample size n1 =         99
+sample size n2 =         99
+         n2/n1 =          1
+
+Estimated power:
+
+         power =    5.45481%
+
+./sampsize -means 10 14 5 -onesample -n 100
+
+Estimated power for one-sample comparison of mean
+to hypothesized value
+
+Test Ho:    m =         10%, where m is the mean in the population
+
+Assumptions:
+
+        alpha =          5% (two-sided)
+alternative m =         14
+           sd =          5
+  sample size =        100
+
+
+Estimated power:
+
+        power =        100%
+
+./sampsize -means 10 13 5 -onesample -onesided -n 100
+
+Estimated power for one-sample comparison of mean
+to hypothesized value
+
+Test Ho:    m =         10%, where m is the mean in the population
+
+Assumptions:
+
+        alpha =          5% (one-sided)
+alternative m =         13
+           sd =          5
+  sample size =        100
+
+
+Estimated power:
+
+        power =    99.9993%
+
+./sampsize -means 10 12 5 -onesample -onesided -alpha 1 -n 100
+
+Estimated power for one-sample comparison of mean
+to hypothesized value
+
+Test Ho:    m =         10%, where m is the mean in the population
+
+Assumptions:
+
+        alpha =          1% (one-sided)
+alternative m =         12
+           sd =          5
+  sample size =        100
+
+
+Estimated power:
+
+        power =    95.2901%
+
+./sampsize -means 10 12 5 5 -n 100
+
+Estimated power for two-sample comparison of means
+
+Test Ho:    m1 = m2, where m1 is the mean in the population 1
+and m2 is the mean in the population 2
+
+Assumptions:
+
+         alpha =          5% (two-sided)
+            m1 =         10
+            m2 =         12
+           sd1 =          5
+           sd2 =          5
+sample size n1 =        100
+sample size n2 =        100
+         n2/n1 =          1
+
+Estimated power:
+
+         power =     80.743%
+
+./sampsize -means 10 11 5 4 -n 100
+
+Estimated power for two-sample comparison of means
+
+Test Ho:    m1 = m2, where m1 is the mean in the population 1
+and m2 is the mean in the population 2
+
+Assumptions:
+
+         alpha =          5% (two-sided)
+            m1 =         10
+            m2 =         11
+           sd1 =          5
+           sd2 =          4
+sample size n1 =        100
+sample size n2 =        100
+         n2/n1 =          1
+
+Estimated power:
+
+         power =    34.5446%
+
+./sampsize -means 10 15 5 0 -n 100
+
+Estimated power for two-sample comparison of means
+
+Test Ho:    m1 = m2, where m1 is the mean in the population 1
+and m2 is the mean in the population 2
+
+Assumptions:
+
+         alpha =          5% (two-sided)
+            m1 =         10
+            m2 =         15
+           sd1 =          5
+           sd2 =          5
+sample size n1 =        100
+sample size n2 =        100
+         n2/n1 =          1
+
+Estimated power:
+
+         power =        100%
+
+./sampsize -means 10 14 5 0 -alpha 1 -n 100
+
+Estimated power for two-sample comparison of means
+
+Test Ho:    m1 = m2, where m1 is the mean in the population 1
+and m2 is the mean in the population 2
+
+Assumptions:
+
+         alpha =          1% (two-sided)
+            m1 =         10
+            m2 =         14
+           sd1 =          5
+           sd2 =          5
+sample size n1 =        100
+sample size n2 =        100
+         n2/n1 =          1
+
+Estimated power:
+
+         power =    99.8969%
+
+./sampsize -means 10 16 5 0 -alpha 3 -onesided -c 0.01 -n 100
+
+Estimated power for two-sample comparison of means
+
+Test Ho:    m1 = m2, where m1 is the mean in the population 1
+and m2 is the mean in the population 2
+
+Assumptions:
+
+         alpha =          3% (one-sided)
+            m1 =         10
+            m2 =         16
+           sd1 =          5
+           sd2 =          5
+sample size n1 =        100
+sample size n2 =          1
+         n2/n1 =       0.01
+
+Estimated power:
+
+         power =     24.612%
+
+./sampsize -means 10 11 5 0 -onesided -n 100
+
+Estimated power for two-sample comparison of means
+
+Test Ho:    m1 = m2, where m1 is the mean in the population 1
+and m2 is the mean in the population 2
+
+Assumptions:
+
+         alpha =          5% (one-sided)
+            m1 =         10
+            m2 =         11
+           sd1 =          5
+           sd2 =          5
+sample size n1 =        100
+sample size n2 =        100
+         n2/n1 =          1
+
+Estimated power:
+
+         power =    40.8797%
+
+./sampsize -means 10 12 1.1 100 -c 33 -n 100
+
+Estimated power for two-sample comparison of means
+
+Test Ho:    m1 = m2, where m1 is the mean in the population 1
+and m2 is the mean in the population 2
+
+Assumptions:
+
+         alpha =          5% (two-sided)
+            m1 =         10
+            m2 =         12
+           sd1 =        1.1
+           sd2 =        100
+sample size n1 =        100
+sample size n2 =       3300
+         n2/n1 =         33
+
+Estimated power:
+
+         power =    20.8958%
+
+./sampsize -means 10 14 5 -onesample -c 10000 -n 100
+
+Estimated power for one-sample comparison of mean
+to hypothesized value
+
+Test Ho:    m =         10%, where m is the mean in the population
+
+Assumptions:
+
+        alpha =          5% (two-sided)
+alternative m =         14
+           sd =          5
+  sample size =        100
+
+
+Estimated power:
+
+        power =        100%
+
+./sampsize -means 10 14 5 -onesample -onesided -n 100
+
+Estimated power for one-sample comparison of mean
+to hypothesized value
+
+Test Ho:    m =         10%, where m is the mean in the population
+
+Assumptions:
+
+        alpha =          5% (one-sided)
+alternative m =         14
+           sd =          5
+  sample size =        100
+
+
+Estimated power:
+
+        power =        100%
+
+./sampsize -means 10 10 5 -onesample -onesided -alpha 1 -n 100
+
+Estimated power for one-sample comparison of mean
+to hypothesized value
+
+Test Ho:    m =         10%, where m is the mean in the population
+
+Assumptions:
+
+        alpha =          1% (one-sided)
+alternative m =         10
+           sd =          5
+  sample size =        100
+
+
+Estimated power:
+
+        power =          1%
+
+./sampsize -or 2 -exp 10
+
+Assumptions:
+
+     Odds ratio             =          2
+     Exposed controls       =         10%
+     Alpha risk             =          5%
+     Power                  =         90%
+     Controls / Case ratio  =          1
+
+     Total exposed          =    14.0909%
+
+Estimated sample size:
+
+     Number of cases        =        378
+     Number of controls     =        378
+
+     Total                  =        756
+
+./sampsize -or 0.2 -exp 3 -power 90 -alpha 5
+
+Assumptions:
+
+     Odds ratio             =        0.2
+     Exposed controls       =          3%
+     Alpha risk             =          5%
+     Power                  =         90%
+     Controls / Case ratio  =          1
+
+     Total exposed          =    1.80738%
+
+Estimated sample size:
+
+     Number of cases        =        654
+     Number of controls     =        654
+
+     Total                  =       1308
+
+./sampsize -or 4 -exp 30 -c 2
+
+Assumptions:
+
+     Odds ratio             =          4
+     Exposed controls       =         30%
+     Alpha risk             =          5%
+     Power                  =         90%
+     Controls / Case ratio  =          2
+
+     Total exposed          =    41.0526%
+
+Estimated sample size:
+
+     Number of cases        =         34
+     Number of controls     =         68
+
+     Total                  =        102
+
+./sampsize -or 4 -exp 30 -power 80
+
+Assumptions:
+
+     Odds ratio             =          4
+     Exposed controls       =         30%
+     Alpha risk             =          5%
+     Power                  =         80%
+     Controls / Case ratio  =          1
+
+     Total exposed          =    46.5789%
+
+Estimated sample size:
+
+     Number of cases        =         35
+     Number of controls     =         35
+
+     Total                  =         70
+
+./sampsize -or 0.1 -exp 1 -alpha 1 -power 99
+
+Assumptions:
+
+     Odds ratio             =        0.1
+     Exposed controls       =          1%
+     Alpha risk             =          1%
+     Power                  =         99%
+     Controls / Case ratio  =          1
+
+     Total exposed          =   0.550454%
+
+Estimated sample size:
+
+     Number of cases        =       3250
+     Number of controls     =       3250
+
+     Total                  =       6500
+
+./sampsize -or 1.1 -exp 5 -power 99 -alpha 1
+
+Assumptions:
+
+     Odds ratio             =        1.1
+     Exposed controls       =          5%
+     Alpha risk             =          1%
+     Power                  =         99%
+     Controls / Case ratio  =          1
+
+     Total exposed          =    5.23632%
+
+Estimated sample size:
+
+     Number of cases        =     106758
+     Number of controls     =     106758
+
+     Total                  =     213516
+
+./sampsize -or 20 -exp 50
+
+Assumptions:
+
+     Odds ratio             =         20
+     Exposed controls       =         50%
+     Alpha risk             =          5%
+     Power                  =         90%
+     Controls / Case ratio  =          1
+
+     Total exposed          =     72.619%
+
+Estimated sample size:
+
+     Number of cases        =         19
+     Number of controls     =         19
+
+     Total                  =         38
+
+./sampsize -or 1.5 -exp 35.29 -n 474 -c 0.538
+
+Assumptions:
+
+     Odds ratio             =        1.5
+     Exposed controls       =      35.29%
+     Alpha risk             =          5%
+     Controls / Case ratio  =      0.538
+
+     Total exposed          =    41.6005%
+
+     Number of cases        =        474
+     Number of controls     =        255
+
+     Total                  =        729
+
+Estimated power:
+
+                      power =    72.0774%
+
+./sampsize -n 365 -exp 35 -onesided
+
+Assumptions:
+
+     Exposed controls       =         35%
+     One-sided alpha risk   =          5%
+     Power                  =         90
+     Number of cases        =        365
+     Number of controls     =        365
+
+     Total                  =        730
+
+Estimated smallest and highest detectable odds-ratio:
+
+   Highest  odds-ratio < 1  =   0.623181
+   Smallest odds-ratio > 1  =    1.55439
+
+./sampsize -n 200 -exp 25
+
+Assumptions:
+
+     Exposed controls       =         25%
+     Alpha risk             =          5%
+     Power                  =         90
+     Number of cases        =        200
+     Number of controls     =        200
+
+     Total                  =        400
+
+Estimated smallest and highest detectable odds-ratio:
+
+   Highest  odds-ratio < 1  =   0.428951
+   Smallest odds-ratio > 1  =    1.99884
+
+./sampsize -exp 30 -or 2 -matched
+
+Assumptions:
+
+     Odds ratio             =          2
+     Exposed controls       =         30%
+     Alpha risk             =          5%
+     Power                  =         90%
+     Probability of an
+  exposure-discordant pair  =    48.4615%
+
+Estimated sample size (number of pairs):
+
+     Number of exposure discordant-pairs  =         91
+     Number of pairs                      =        187
+     Total sample size                    =        374
+
+./sampsize -cp 20 21 -numclus 80 -rho 0.001
+
+Estimated sample size for two-sample comparison of percentages
+
+Test H:    p1 = p2, where p1 is the percentage in population 1
+and p2 is the percentage in population 2
+
+Assumptions:
+        alpha =          5% (two-sided)
+        power =         90%
+           p1 =         20%
+           p2 =         21%
+
+Estimated sample size:
+           n1 =      34247
+           n2 =      34247
+
+
+Sample size adjusted for cluster design:
+
+  Intraclass correlation     =      0.001
+  Average obs. per cluster   =       5947
+  Minimum number of clusters =         80
+
+Estimated sample size per group:
+
+           n1 (corrected)    =     237880
+           n2 (corrected)    =     237880
+
+./sampsize -cp 20 21 -numclus 9980 -rho 0.001
+
+Estimated sample size for two-sample comparison of percentages
+
+Test H:    p1 = p2, where p1 is the percentage in population 1
+and p2 is the percentage in population 2
+
+Assumptions:
+        alpha =          5% (two-sided)
+        power =         90%
+           p1 =         20%
+           p2 =         21%
+
+Estimated sample size:
+           n1 =      34247
+           n2 =      34247
+
+
+Sample size adjusted for cluster design:
+
+  Intraclass correlation     =      0.001
+  Average obs. per cluster   =          7
+  Minimum number of clusters =       9980
+
+Estimated sample size per group:
+
+           n1 (corrected)    =      34453
+           n2 (corrected)    =      34453
+
+./sampsize -cp 20 21 -numclus 1000 -rho .9
+
+Estimated sample size for two-sample comparison of percentages
+
+Test H:    p1 = p2, where p1 is the percentage in population 1
+and p2 is the percentage in population 2
+
+Assumptions:
+        alpha =          5% (two-sided)
+        power =         90%
+           p1 =         20%
+           p2 =         21%
+
+Estimated sample size:
+           n1 =      34247
+           n2 =      34247
+
+
+Sample size adjusted for cluster design:
+
+Error: for rho =        0.9, the minimum number of clusters possible is:
+       numclus =      61645
+
+./sampsize -means 1 2 3 4 -onesided
+
+Estimated sample size for two-sample comparison of means
+
+Test Ho:   m1 = m2, where m1 is the mean in population 1
+and m2 is the mean in population 2
+
+Assumptions: 
+
+        alpha =          5 (one-sided)
+        power =         90
+           m1 =          1
+           m2 =          2
+          sd1 =          3
+          sd2 =          4
+        n2/n1 =          1
+
+Estimated sample size:
+
+           n1 =        215
+           n2 =        215
+
+./sampsize -means 1 2 3 4 -onesided -obsclus 8 -rho 0.02
+
+Estimated sample size for two-sample comparison of means
+
+Test Ho:   m1 = m2, where m1 is the mean in population 1
+and m2 is the mean in population 2
+
+Assumptions: 
+
+        alpha =          5 (one-sided)
+        power =         90
+           m1 =          1
+           m2 =          2
+          sd1 =          3
+          sd2 =          4
+        n2/n1 =          1
+
+Estimated sample size:
+
+           n1 =        215
+           n2 =        215
+
+
+Sample size adjusted for cluster design:
+
+  Intraclass correlation     =       0.02
+  Average obs. per cluster   =          8
+  Minimum number of clusters =         62
+
+Estimated sample size per group:
+
+           n1 (corrected)    =        246
+           n2 (corrected)    =        246
+
+./sampsize -means 1 2 3 -onesided -obsclus 8 -rho 0.02 -onesample
+
+Estimated sample size for one-sample comparison of mean to
+hypothesized value
+
+Test Ho:    m =          1, where m is the mean in the population
+
+Assumptions:
+        alpha =          5 (one-sided)
+        power =         90
+alternative m =          2
+           sd =          3
+
+Estimated sample size:
+            n =         78
+
+
+Sample size adjusted for cluster design:
+
+  Intraclass correlation     =       0.02
+  Average obs. per cluster   =          8
+  Minimum number of clusters =         23
+
+Estimated sample size per group:
+
+           n1 (corrected)    =         89
+
+./sampsize -means 1 2 3 -onesided -obsclus 8 -rho 0.92 -onesample
+
+Estimated sample size for one-sample comparison of mean to
+hypothesized value
+
+Test Ho:    m =          1, where m is the mean in the population
+
+Assumptions:
+        alpha =          5 (one-sided)
+        power =         90
+alternative m =          2
+           sd =          3
+
+Estimated sample size:
+            n =         78
+
+
+Sample size adjusted for cluster design:
+
+  Intraclass correlation     =       0.92
+  Average obs. per cluster   =          8
+  Minimum number of clusters =        146
+
+Estimated sample size per group:
+
+           n1 (corrected)    =        581
+
+./sampsize -cp 1 2 -n 2000 -obsclus 25 -rho .5
+
+Estimated power for two-sample comparison of percentages
+
+Test Ho:    p1 = p2, where p1 is the percentage in the population 1
+and p2 is the percentage in the population 2
+
+Assumptions:
+
+         alpha =          5 (two-sided)
+            p1 =          1%
+            p2 =          2%
+sample size n1 =       2000
+sample size n2 =       2000
+         n2/n1 =          1
+
+Estimated power:
+
+        power =    73.9616%
+
+
+Sample size adjusted for cluster design:
+
+  Intraclass correlation     =        0.5
+  Average obs. per cluster   =         25
+  Minimum number of clusters =       2080
+
+Estimated sample size per group:
+
+           n1 (corrected)    =      26000
+           n2 (corrected)    =      26000
+
+./sampsize -cp 20 20 -d 5
+
+Estimated sample size for two-sample non-inferiority comparison of percentages
+
+Test H0:    p2 < p1 - delta, where p1 is the percentage in population 1,
+p2 is the percentage in population 2, and delta is the critical value
+
+Assumptions:
+        alpha =          5% (two-sided)
+        power =         90%
+           p1 =         20%
+           p2 =         20%
+        delta =          5%
+
+Estimated sample size per group:
+           n =       1097
+
+./sampsize -cp 20 21 -d 5
+
+Estimated sample size for two-sample non-inferiority comparison of percentages
+
+Test H0:    p2 < p1 - delta, where p1 is the percentage in population 1,
+p2 is the percentage in population 2, and delta is the critical value
+
+Assumptions:
+        alpha =          5% (two-sided)
+        power =         90%
+           p1 =         20%
+           p2 =         21%
+        delta =          5%
+
+Estimated sample size per group:
+           n =        776
+
+./sampsize -cp 0 1 -d 0.1
+
+Estimated sample size for two-sample non-inferiority comparison of percentages
+
+Test H0:    p2 < p1 - delta, where p1 is the percentage in population 1,
+p2 is the percentage in population 2, and delta is the critical value
+
+Assumptions:
+        alpha =          5% (two-sided)
+        power =         90%
+           p1 =          0%
+           p2 =          1%
+        delta =        0.1%
+
+Estimated sample size per group:
+           n =        701
+
+./sampsize -means 12 12 5 5 -d 2
+
+Estimated sample size for two-sample non-inferiority comparison of means
+
+Test H0:    diff < delta, where diff is the difference in means
+Assumptions:
+         alpha =          5% (two-sided)
+         power =         90%
+ mean standard =         12
+mean treatment =         12
+     std dev s =          5
+     std dev t =          5
+         delta =          2
+
+Estimated sample size per group:
+           n =        108
+
+./sampsize -means 12 13 5 6 -d 2
+
+Estimated sample size for two-sample non-inferiority comparison of means
+
+Test H0:    diff < delta, where diff is the difference in means
+Assumptions:
+         alpha =          5% (two-sided)
+         power =         90%
+ mean standard =         12
+mean treatment =         13
+     std dev s =          5
+     std dev t =          6
+         delta =          2
+
+Estimated sample size per group:
+           n =         59
+

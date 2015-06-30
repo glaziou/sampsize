@@ -1,0 +1,639 @@
+.TH SAMPSIZE 1 "2003-05-08" "GNU Sampsize" "GNU Sampsize"
+.\" Some roff macros, for reference:
+.\" .nh        disable hyphenation
+.\" .hy        enable hyphenation
+.\" .ad l      left justify
+.\" .ad b      justify to both left and right margins
+.\" .nf        disable filling
+.\" .fi        enable filling
+.\" .br        insert line break
+.\" .sp <n>    insert n+1 empty lines
+
+.SH NAME
+sampsize \- Computes sample size and power
+
+.\" cligPart SYNOPSIS
+.SH SYNOPSIS
+.B sampsize
+[-h]
+[-v]
+[-onesided]
+[-onesample]
+[-matched]
+[-cc]
+[-pop pop]
+[-e precision]
+[-pr prevalence]
+[-level level]
+[-alpha alpha]
+[-power power]
+[-c ratio]
+[-or odds_ratio]
+[-exp exposed]
+[-cp comp]
+[-means means]
+[-rho rho]
+[-d delta]
+[-nob observed]
+[-bi binomial]
+[-n sample]
+[-obsclus obsclus]
+[-numclus numclus]
+
+.\" cligPart SYNOPSIS end
+
+.SH OPTIONS
+.IP -h
+show usage information
+.IP -v
+show program version
+.IP -onesided
+one-sided test for comparisons
+.IP -onesample
+one-sample test
+.IP -matched
+1:1 matched case-control study
+.IP -cc
+continuity correction
+.IP -pop
+target population size,
+.br
+1 value between 0.0 and oo.
+.br
+Default: `0'
+.IP -e
+precision of estimate (%) -- prevalence study option,
+.br
+1 value between 0.0 and 100.
+.IP -pr
+prevalence (%) -- prevalence study option,
+.br
+1 value between 0.0 and 100.
+.br
+Default: `50'
+.IP -level
+level of confidence interval (%),
+.br
+1 value between 50.0 and 100.
+.br
+Default: `95'
+.IP -alpha
+Risk alpha (%),
+.br
+1 value between 0.0 and 100.
+.br
+Default: `5'
+.IP -power
+Power of the test (%),
+.br
+1 value between 50.0 and 100.
+.br
+Default: `90'
+.IP -c
+number of controls per case,
+.br
+1 integer value between 0 and oo with case control options, or
+.br
+1 value between 0.0 and oo with other relevant options,
+.br
+Default: `1'
+.IP -or
+Odds Ratio -- case-control study option,
+.br
+1 value between 0.0 and oo.
+.IP -exp
+Exposed controls (%) -- case-control study option,
+.br
+1 value between 0.0 and 100.
+.IP -cp
+#p1 (%) #p2 (%) -- two sample comparison of percentages,
+.br
+2 consecutive values between 0.0 and 100.
+.IP -means
+#m1 #m2 #sd1 #sd2 -- two sample comparison of means,
+.br
+3 values if onesample is selected or else, 4 consecutive values.
+.IP -rho
+intraclass correlation coefficient -- cluster option
+.br
+1 value between 0.0 and 1, default 0
+.IP -nob
+minimum number of events observed in the sample,
+.br
+1 integer value between 1 and 10000.
+.IP -bi
+#obs #succ (binomial events, #obs >= #succ),
+.br
+2 integer values between 0 and oo.
+.IP -n
+determine power from sample size,
+.br
+\&	n = size of first group (two-group comparative studies)
+.br
+\&	n = number of cases (unmatched case-control study)
+.br
+\&	n = number of pairs (1:1 matched case-control study)
+.br
+1 integer value between 1 and oo.
+.IP -obsclus
+number of observations per cluster
+.br
+1 integer value > 0
+.IP -numclus
+minimum number of clusters
+.br
+1 integer value > 0
+.IP -d
+delta critical value
+.br
+1 value between 0.0 and oo
+
+.SH DESCRIPTION
+\fBsampsize\fP computes sample size and power for prevalence studies, sample
+size and power for one-sample and two-sample comparative studies of percentages
+and means, and for unmatched and 1:1 matched case-control studies. 
+
+.SH USAGE
+.sp 1
+.IP "\fBPrevalence Surveys\fR"
+.PP
+The following options are relevant to simple prevalence studies:
+.IP -e  
+precision (%): we wish to obtain confidence limits equal to prevalence +/- precision
+.IP -pr
+prevalence (%), default 50%
+.IP -pop
+target population size, default 0 (infinite)
+.IP -level
+of confidence interval, default 95%
+.PP
+The population size is the total size of the population from which a sample
+will be drawn for a prevalence survey. If the population size is small, the
+correction for finite population will result in a reduced sample size. A
+prevalence study will need either the \fB-e\fP option for precision, or the
+\fB-nob\fP option to specify a finite number of events (see below).
+.PP
+Entering 50 (50%) for the estimated prevalence (\fB-pr 50\fP), which is the
+default value, will result in the highest estimated sample size.  Entering 0
+for the population size (\fB-pop 0\fP) will result in the programme using an
+infinite population size.  If a null prevalence is entered (\fB-pr 0\fP),
+\fBsampsize\fP returns the estimated sample size needed for a 95% (default)
+confidence interval upper limit that is equal to the entered precision (option
+\fB-e\fP).  Any other confidence interval may be selected instead of the 95%
+confidence interval, using the option \fB-level\fP. \fBSampsize\fP will display
+the binomial exact confidence interval using the returned sample size unless a
+finite population size is specified. It may happen that this exact interval is
+larger than the expected interval (prevalence plus or minus precision), when
+the number of successful events is lower than 5, or when sample size minus that
+number is lower than 5, due to the lack of precision of the normal
+approximation formula with small numbers. In thoses instances, it is advisable
+to test different hypotheses of sample size and hypothetical numbers of
+successful binomial events using the \fB-bi\fP option (see below).
+.sp 1
+.IP "\fBMinimum number of events to detect\fR"
+.PP
+This is a variation over the previous design: prevalence is low and the
+capacity to deal with a large sample often necessary to achieve a reasonable
+precision of the measured estimate is limited. We will rather want to detect
+with probability specified with \fB-level\fP at least n sampled units with the
+studied characteristic, given a probability of occurence = prevalence
+(\fB-pr\fP).  The option \fB-nob\fP instructs sampsize to return the sample
+size needed to observe at least \fB-nob\fP successful events, given a \fB-pr\fP
+probability of occurence. Relevant options are:
+.IP -nob        
+number to observe
+.IP -pr 
+prevalence: probability (%) of occurence of one event
+.IP -level
+probability of observing the given number of events
+.sp 1
+.IP "\fBBinomial confidence intervals\fR"
+.PP
+The first design options may lead to small samples and the approximations used
+to estimate sample size are known to be non valid if less than 5 sampled units
+are expected to have the studied characteristic (equally problemactic: all
+sampled units minus 5 or less have that characteristic). One  alternative
+approach is to calculate the binomial exact confidence intervals that result
+from different sets of numbers. Relevant options are:
+.IP -bi
+two parameters: number of observations, number of successes
+.IP -level
+of confidence interval, default 95%
+.sp 1
+.IP "\fBComparison of percentages and means: sample size and power\fR"
+.PP
+\fBSampsize\fP estimates the required sample size for studies comparing two
+groups. \fBSampsize\fP can be used when comparing means or proportions for
+simple studies where only one measurement of the outcome is planned.
+\fBSampsize\fP computes the sample size for two-sample comparison of means,
+where the postulated values of the means and standard deviations are \fB-means
+m1 m2 sd1 sd2\fP; one-sample comparison of mean to hypothesized value (option
+\fB-onesample\fP must be specified and only three parameters to the option
+\fB-means\fP are allowed in one-sample tests: m1, m2 and sd1); two-sample
+comparison of proportions (option \fB-cp\fP where the postulated values of the
+proportions are #1 and #2); and one-sample comparison of proportion to
+hypothesized value (option \fB-onesample\fP should be specified), where the
+hypothesized proportion (null hypothesis) is #1 and the postulated proportion
+(alternative hypothesis) is #2. Default power is 90%. If \fB-n\fP is specified,
+\fBsampsize\fP will compute power. 
+.PP
+In the case of a cluster sampling design, a sample of natural groups of
+individuals is selected, rather than a random sample of the individuals
+themselves. Observations are no longer independant as we would expect had they
+been drawn randomly from the population. Nonindependance is measured by the
+intraclass correlation, which is specified with option \fB-rho\fP (between 0
+and 1).  One may then specify \fB-numclus\fP, the number of clusters (for
+instance, the number of physicians who will recruit the patients: typically,
+the intraclass orrelation will be fairly small, often between 0 and 0.05), or
+alternatively, \fB-obsclus\fP, the minimum number of observations per cluster.
+The larger the number of clusters and the fewer observations per cluster, the
+less the effect on the standard error estimates. A sample of 250 consisting of
+50 clusters with 5 observations per cluster will have better power than the
+same sample size consisting of 25 clusters with 10 observations per cluster. In
+fact, with only one observation per cluster, we are back to a simple random
+sample. If there is no intraclass correlation, there will be no increase in the
+sample size estimate.
+.PP
+By default, no continuity correction is applied when computing sample
+size or power for the comparison of two percentages. However, the
+correction may be applied with option \fB-cc\fP. The correction will
+result in a greater sample size and smaller power. Simulations showed
+that the correction is most often too conservative (Alzola C and
+Harrell F, An introduction to S and the Hmisc and Design Libraries:
+http://hesweb1.med.virginia.edu/biostat/s/splus.html).
+.PP
+Relevant options are (either \fB-cp\fP or \fB-means\fP must be specified, not 
+both):
+.IP -cp
+percentages (%), two parameters for two proportions to compare
+.IP -means
+two means and two standard deviations (one if one-sample): m1 m2 sd1 [sd2]
+.IP -alpha
+alpha risk (%), default 5%
+.IP -n
+sample size of the first group (total sample size in one-sample comparison)
+.IP -power
+power of the comparison (%), default 90%
+.IP -onesided
+one-sided test
+.IP -onesample
+one-sample comparison against hypothesized value
+.IP -rho
+intraclass correlation (between 0 and 1)
+.IP -obsclus
+number of observations per cluster
+.IP -numclus
+minimum number of cluster
+.IP -cc
+continuity correction
+.sp 1
+.IP "\fBCase-control studies\fR"
+.PP
+To specify a case-control design, we need to type the option \fB-exp\fP, which
+specifies the percentage of exposed controls. If we add the option \fB-or\fP,
+the odds-ratio that that we wish to detect, \fBsampsize\fP will return the
+sample size for an unmatched design (option \fB-c\fP specifies the ratio of
+controls/cases, the default ratio is 1). The option \fB-matched\fP may be used
+to specify a 1:1 matched study design (\fB-c\fP may not be used with
+\fB-matched\fP). If we specify \fB-exp\fP, \fB-or\fP, and \fB-n\fP,
+\fBsampsize\fP will return the power of the specified design. If one specifies
+\fB-exp\fP and \fB-n\fP, which is the number of cases, \fBsampsize\fP will
+return the minimum detectable odds-ratio greater than one and the maximum
+detectable odds-ratio lower than one, an alternative to the power
+determination. Relevant options are:
+.IP -exp
+percentage exposed among controls
+.IP -n
+number of cases, or number of pairs if 1:1 matched case-control study
+.IP -or
+odds-ratio to detect
+.IP -c
+ratio of controls/cases (truncated to integer), default 1, not used if matched
+.IP -alpha
+alpha risk (%), default 5%
+.IP -power
+power of the comparison (%), default 90%
+.IP -onesided
+one-sided test
+.IP -matched
+1:1 matched case-control study
+.sp 1
+.IP "\fBEquivalence trials: sample size\fR"
+.PP
+The goal of an equivalence trial is to prove that two quantities are equal. The
+hypothesis framework for an equivalence trial requires the specification of no
+difference in the alternative and a difference in the null. It contains an
+additional parameter delta, \fB-d\fP, to indicate the maximum clinical
+difference allowed for an experimental therapy to be considered equivalent with
+a standard therapy. Binomial endpoints are defined as the positive difference
+of the probability of success for the standard group (ps) and the probability
+of success for the experimental group (pt) of patients. These probabities are
+entered with \fB-cp #ps #pt\fP (percentages), and delta is entered as a
+percentage. In the case of a continuous endpoint, delta indicates the maximum
+clinical difference allowed for the comparison of two means, and is entered
+using the \fB-d\fP option. Means and standard deviations are to be entered the
+usual way with \fB-means ms me ss se\fP, with ms and me the means in the
+standard and experimental group, respectively, and ss and se the standard
+deviations.
+.PP
+There is a general misconception that it requires a larger sample to prove
+equivalence than difference. The veracity of this assumption is
+situation-specific and dependant upon the degree of difference, delta, one is
+willing to allow so that the standard and experimental treatments may still be
+considered equivalent. Relevant options are:
+.IP -cp
+percentages (%), two parameters for two proportions to compare
+.IP -means
+two means and two standard deviations (one if one-sample): m1 m2 sd1 [sd2]
+.IP -alpha
+alpha risk (%), default 5%
+
+.SH EXAMPLES
+.IX Header "EXAMPLES"
+.Sh "Prevalence surveys"
+.IX Subsection "Prevalence surveys"
+.IP "\fBPrevalence Surveys\fR" 4
+.IP "\(bu" 4
+To calculate the sample size given a 50% prevalence (default) and infinite
+population size (also default), with 5% precision: the upper boundary of the
+confidence interval will equal the observed prevalence plus 5%, and the lower
+boundary will equal the observed prevalence minus 5%, i.e. [45% - 55%]: 
+
+\&	sampsize -e 5 
+.IP "\(bu" 4
+To get the needed sample size after correction for population size (n = 1500):
+
+\&	sampsize -e 5 -pop 1500 
+.IP "\(bu" 4
+Assuming a prevalence of 10%, a precision of 4% estimated using a 90% confidence
+interval, and a target population size of 2500:
+
+\&	sampsize -pr 10 -e 4 -pop 2500 -level 90
+.IP "\(bu" 4
+Assuming that the observed prevalence in the sample will be null, 
+for a 97.5% one-sided confidence interval upper limit that is equal to
+the entered precision (2% in this example), type:
+
+\&	sampsize -pr 0 -e 2
+.IP "\(bu" 4
+Assuming that the observed prevalence in the sample will be null, 
+for 95% one-sided confidence interval upper limit equal to
+the entered precision (2% in this example), type:
+
+\&	sampsize -pr 0 -e 2 -level 90
+.IP "\(bu" 4
+A study on the hepatitis C virus aims at describing some characteristics of the
+virus strains. It is assumed that the prevalence of virus positive individuals
+is 10% in the population. The investigators wish to calculate the sample size
+needed to be 95% sure that at least 5 patients will harbour a virus. 
+
+\&	sampsize -nob 5 -pr 10
+.IP "\(bu" 4
+You flip a coin 10 times and it comes up heads only once. You are shocked and
+decide to obtain a 99% confidence interval for this coin: 
+
+\&	sampsize -bi 10 1
+.sp 1
+.Sh "Comparative studies of proportions"
+.IX Subsection "Comparative studies of proportions"
+.IP "\fBComparative studies of proportions\fR" 4
+.IP "\(bu" 4
+Someone claims that US females are more likely than US males to
+study French. Our null hypothesis is that the proportion of female French
+students is 0.5. We wish to compute the sample size that will give us a 80%
+power to reject the null hypothesis if the true proportion of female French
+students is 75%.
+
+\&	sampsize -cp 50 75 -power 80 -onesample
+.IP "\(bu" 4
+We want to conduct a survey on people's opinions of the President's
+performance. Specifically, we want to determine whether members of the
+President's party have a different opinion from people with another party
+affiliation. We estimate that only 25% of members of the President's party will
+say that the President is doing a poor job, whereas 40% of other parties will
+rate the President's performance as poor. We compute the sample size for alpha
+= 5% (two-sided) and power = 90%:
+
+\&	sampsize -cp 25 40
+.IP "\(bu" 4
+Following the calculation for the survey on the President's performance, we
+realize that we can sample only n1 = 300 members of the President's party and a
+sample of n2 = 150 members of other parties, due to time constraints. We wish
+to compute the power of our survey:
+
+\&	sampsize -n 300 -cp 25 40 -c 0.5
+.IP "\(bu" 4
+We wish to study the proportion of patients who have not recovered from a back
+pain by 4 weeks, and compare the outcome between patients in whom sciatica was
+diagnosed and patients without sciatica. We know that typically, about 20% of
+acute low back pain patients have not recovered by 4 weeks and think that the
+percentage may be 30% for patients who also have sciatica. The sample size we
+would need to detect this difference between the two groups, with a two-sided
+alpha of 5% and a power or 80% is 313:
+
+\&	sampsize -cp 20 30 -power 80
+.IP "\(bu" 4
+Now we look at the same example using 10 observations per cluster and an
+intraclass correlation of 0.1:
+
+\&	sampsize -cp 20 30 -power 80 -obsclus 10 -rho 0.1
+.IP "\(bu" 4
+Taking into account the cluster design of the study, our samples have increased
+to 595 per group and a total of 119 physicians (clusters). Finally, we try the
+calculation assuming only 40 physicians: 
+
+\&	sampsize -cp 20 30 -power 80 -numclus 40 -rho 0.1
+.IP "\(bu" 4
+We got an error message telling us that, given these sets of sample size
+parameters, it is not possible to estimate a sample size with fewer than 63
+clusters. We need to rerun \fBsampsize\fP with different parameters in order to
+get a manageable number of patients.
+
+\&	sampsize -cp 20 30 -power 80 -numclus 40 -rho 0.05
+.sp 1
+.Sh "Comparative studies of means"
+.IX Subsection "Comparative studies of means"
+.IP "\fBComparative studies of means\fR" 4
+.IP "\(bu" 4
+We wish to test the effects of a low-fat diet on serum cholesterol levels. We
+will measure the difference in cholesterol level for each subject before and
+after being on the diet. Since there is only one group of subjects, all on
+diet, this is a one-sample test. Our null hypothesis is that the mean of
+individual differences in cholesterol level will be zero; i.e., mdiff =
+0mg/100ml. If the effect of the diet is as large as a mean difference of
+-10mg/100ml, then we wish to have power of 95% for rejecting the null
+hypothesis. Since we expect a reduction in levels, we want to use a one-sided
+test with alpha = 2.5%. Based on past studies, we estimate that the standard
+deviation of the difference in cholesterol levels will be about 20mg/100ml:
+
+\&	sampsize -means 0 -10 20 -onesample -alpha 2.5 -onesided -power 95
+.IP "\(bu" 4
+We decide to conduct the cholesterol study with n = 60 subjects, an we wonder
+what the power will be at a one-sided significance level of alpha = 1%:
+
+\&	sampsize -n 60 -means 0 -10 20 -onesample -onesided -alpha 1 
+.IP "\(bu" 4
+We are doing a study of the relationship of oral contraceptives (OC) and blood
+pressure (BP) level for women ages 35-39. From a pilot study, it was determined
+that the mean and standard deviation BP of OC users were 132.86 and 15.34,
+respectively. The mean and standard deviation BP of OC users were 127.44 and
+18.23. Since it is easier to find OC nonusers than users in the country were
+the study is conducted, we decide that n2, the size of the sample of OC users,
+should be twice n1, the size of the sample of OC users; that is, c = n2/n1 = 2.
+To compute the sample sizes for alpha = 5% (two-sided) and the power of 80%:
+
+\&	sampsize -means 132.86 127.44 15.34 18.23 -power 80 -c 2
+.sp 1
+.IP "\(bu" 4
+We now find that we only have enough money to study 100 subjects from each
+group for the above oral contraceptives study. We can compute the power for n1
+= n2 = 100
+
+\&	sampsize -n 100 -means 132.86 127.44 15.34 18.23
+.IP "\(bu" 4
+Patients for the study on oral contraceptives and blood pressure will be
+recruited in 12 clinics, and we suspect some intraclass correlation (patients
+recruited in the same clinic are more alike than patients recruited from
+different clinics). Due to the cluster sampling design, patients are not
+independant observations, and we wish to correct the above sample size
+(sampsize returned a sample size of 108 in the first group, and 216 in the
+second group). We think that the intraclass correlation is fairly small (0.02),
+and compute:
+
+\&	sampsize -means 132.86 127.44 15.34 18.23 -power 80 -c 2  
+-numclus 12 -rho 0.02
+
+The design effect is rather important despite a small intraclass correlation,
+due to the small number of clusters. Sampsize returned n1 = 232 and n2 = 464,
+more than twice the initial sample size.
+.sp 1
+.Sh "Case Control Studies"
+.IX Subsection "Case-Control Studies"
+.IP "\fBCase-Control Studies\fR" 4
+.IP "\(bu" 4
+We wish to conduct a case control study to assess whether bladder cancer is
+associated with past exposure to cigarette smoking. Cases will be patients with
+bladder cancer and controls will be patients hospitalized for injury. It is
+assumed that 20% of controls will be smokers or past smokers, and we wish to
+detect an odds-ratio of 2 with power 90%. Three controls will be recruited for
+one case:
+
+\&	sampsize -or 2 -exp 20 -c 3
+.IP "\(bu" 4
+The above study on bladder cancer needed a total sample size of 600. An
+alternative is to conduct a matched case-control study of bladder cancer and
+cigarette smoking rather than the above unmatched study design. One case will
+be matched to one control. Again, the percentage of exposed controls is 20%,
+and we wish to detect a two-fold increased risk (OR = 2). With these
+specifications, we need 226 pairs (total sample size 452).
+
+\&	sampsize -or 2 -exp 20 -matched
+.IP "\(bu" 4
+The following table (Kline et al., 1978) shows previous induced abortions among 
+multigravid cases and controls. (Primiigravidae were excluded since these women 
+did not have prior pregnancies.):
+
+\&	----------------------------------
+.br
+\&		  Spontaneous	  Controls
+.br
+\&		  abortions
+.br
+\&	----------------------------------
+.br
+\&	PIA:
+.br
+\&  	. Yes	   171		 90
+.br
+\&  	.  No	   303		165
+.br
+\&
+.br
+\&	Total:	   474		255
+.br
+\&	----------------------------------
+
+The power of the study for detecting a relative risk of R = 1.5 is calculated as 
+follows: c = 255/474 = 0.538, percentage exposed in controls = 100*90/255 = 35.29:
+
+\&	sampsize -or 1.5 -exp 35.29 -c 0.538 -n 474
+.IP "\(bu" 4
+Kessler and Clark (1978) studied 365 males with bladder cancer and an equal number 
+of controls, 35 percent of whom reported past use of nonnutritive sweeteners. Using 
+a one-sided test at the alpha = 5% level, the smallest relative risk greater than one that can be detected with 90% power is RR = 1.55:
+
+\&	sampsize -n 365 -exp 35 -onesided
+.sp 1
+.Sh "Equivalence trials"
+.IX "Equivalence trials"
+.IP "\fBEquivalence trials\fR" 4
+.IP "\(bu" 4
+Researchers want to show that a new treatment is "as good as" the
+standard one. The success rates of both treatments are expected to be
+approximately 90%. The researchers want to be sure that the new
+treatment is no worse than the standard treatment by an amount of 10%.
+Then, the sample size for each treatment group is 155 patients:
+
+\&	sampsize -cp 90 90 -d 10
+
+.sp 1
+.SH PRIMARY FTP SITE
+The most recent distributions can be found at:
+.RS
+.I http://prdownloads.sourceforge.net/sampsize/
+.RE
+
+\fBSampsize\fP project home page:
+.RS
+.I http://sampsize.sourceforge.net/
+.RE
+.sp 1
+.SH NOTES
+Some parts of \fBsampsize\fP are translated and adapted from publicly available code written in the R (http://www.r-project.org) or the stata language (Statacorp Inc.).
+.IP REFERENCES
+.IP [1]
+Blackwelder WC. Proving the null hypothesis in clinical trials. Controlled clinical
+trials 1982; 3: 345-353.
+.IP [2]
+Cephes mathematical library. Release 2.8: June 2000. 
+http://www.moshier.net/cephes-math-28.tar.gz, accessed and downloaded May 2002.
+.IP [3]
+Garrett JM. Sample size estimation for cluster designed samples. STB Reprints 
+2002: 10; 387-393.
+.IP [4]
+Levy PS, Lemeshow S. Sampling of populations. Methods and Applications. Wiley Series in Probability and Statistics, John Wiley and Sons, Inc. 1999.
+.IP [5]
+Pagano P., Gauvreau K. Principles of biostatistics. 2d ed. Pacific Grove, CA: Brooks/Cole 2000.
+.IP [6]
+Rosner B. Fundamentals of Biostatistics. 5th ed. Pacific Grove, CA: Duxbury Press.
+.IP [7]
+Schlesselman JJ. Case-Control Studies. Design, Conduct, Analysis. Oxford Univ. 
+Press 1982.
+.IP [9]
+Blackwelder WC. "Proving the null hypothesis" in clinical trials. Controlled Clinical Trials 1982; 3: 345-353.
+
+.SH BUGS
+If you find a bug, you should report it. But first make sure that it really is
+a bug and that it appears in the latest version of \fBsampsize\fP that you
+have. Then you may mail your bug report to the author. Fixes are welcome too!
+
+.SH AUTHOR
+Originally written by Philippe Glaziou <glaziou@pasteur-kh.org>.
+
+.SH "COPYRIGHT"
+.IX Header "COPYRIGHT"
+Copyright (c) 2003 Free Software Foundation, Inc.
+.PP
+Permission is granted to make and distribute verbatim copies of
+this manual provided the copyright notice and this permission notice
+are preserved on all copies.
+.PP
+Permission is granted to copy, distribute and/or modify this document
+under the terms of the \s-1GNU\s0 Free Documentation License, Version 1.1 or
+any later version published by the Free Software Foundation; with the
+Invariant Sections being ``\s-1GNU\s0 General Public License'' and ``\s-1GNU\s0 
+Free
+Documentation License'', with no Front-Cover Texts, and with no
+Back-Cover Texts.  A copy of the license is included in the section
+entitled ``\s-1GNU\s0 Free Documentation License''.
+
